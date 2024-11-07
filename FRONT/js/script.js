@@ -16,13 +16,13 @@ form.addEventListener("submit", async (event) => {
     const data = await response.json();
 
     const token = data.token;
-    const userEmail = data.user.email;
-    const userId = data.user.id;
-    console.log(token, userEmail, userId);
+    const adminEmail = data.admin.email;
+    const adminId = data.admin.id;
+    console.log(token, adminEmail, adminId);
 
     window.localStorage.setItem("token", token);
-    window.localStorage.setItem("userEmail", userEmail);
-    window.localStorage.setItem("userId", userId);
+    window.localStorage.setItem("adminEmail", adminEmail);
+    window.localStorage.setItem("adminId", adminId);
 
     window.location.href = "../html/admin.html";
 });

@@ -13,19 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             Int       @id @default(autoincrement())
-  email           String    @unique
+model Admin {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
   password   String
+
   // Un seul admin pour l'application
 }
 
+model Mail {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+}
+
+
 model Etiquette {
   id              Int       @id @default(autoincrement())
+  slug            String    @unique
   image           String?
   video           String?
-  titre           String     @unique
+  title           String     @unique
   description     String?
+  qrcode          String?
   statut          EtiquetteStatus @default(en_cours)
 }
 
@@ -34,4 +43,16 @@ enum EtiquetteStatus {
   termine
 }
 
+model Creator{
+  id              Int       @id @default(autoincrement())
+  email           String    @unique
+  linkedin        String?
+  image           String?
+}
 
+model Tag{
+  id             Int       @id @default(autoincrement())
+  slug           String    @unique
+  name           String    @unique
+  description    String?   @db.VarChar(512)
+}

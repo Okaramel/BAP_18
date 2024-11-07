@@ -1,65 +1,65 @@
 import prisma from "../config/prisma.js";
 import { hashPassword } from "../config/bcrypt.js";
 
-export async function createUser(req, res) {
+export async function createAdmin(req, res) {
     try {
         const body = req.body;
 
         // Vérifiez si l'utilisateur existe déjà
-        const existingUser = await prisma.user.findUnique({
+        const existingAdmin = await prisma.admin.findUnique({
             where: {
                 email: body.email,
             },
         });
 
-        if (existingUser) {
+        if (existingAdmin) {
             return res.status(409).json({ error: "Email already exists" });
         }
 
-        const user = await prisma.user.create({
+        const admin = await prisma.admin.create({
             data: {
                 email: body.email,
                 password: await hashPassword(body.password), // hash le mot de passe via bcrypt
             },
         });
 
-        return res.status(201).json(user);
+        return res.status(201).json(admin);
     } catch (error) {
         return res.status(500).json({ error: "Internal server error" });
     }
 }
 
-export async function getUsers(req, res) {
+export async function getAdmin(req, res) {
     try {
-        const users = await prisma.user.findMany();
+        const admin = await prisma.admin.findMany();
 
-        return res.status(200).json(users);
+        return res.status(200).json(admin);
     } catch (error) {
-        return res.status(404).json({ error: "No users found" });
+        return res.status(404).json({ error: "No admin found" });
     }
 }
 
-export async function deleteUser(req, res) {
+export async function deleteAdmin(req, res) {
     try {
         const { id } = req.params;
 
-        const user = await prisma.user.delete({
+        const admin = await prisma.admin.delete({
             where: {
                 id: parseInt(id),
             },
         });
 
-        return res.status(200).json(user);
+        return res.status(200).json(admin);
     } catch (error) {
         return res.status(404).json({ error: "User not found" });
     }
 }
 
-export async function updateUser(req, res) {
+export async function updateAdmin(req, res) {
     try {
         const { id } = req.params;
 
-        const user = await prisma.user.update({
+        const admin = await prisma.admin.update({
             where: {
                 id: parseInt(id),
             },
@@ -68,7 +68,7 @@ export async function updateUser(req, res) {
                 password: req.body.password,
             },
         });
-        return res.status(200).json(user);
+        return res.status(200).json(admin);
     } catch (error) {
         return res.status(404).json({ error: "User not found" });
     }
