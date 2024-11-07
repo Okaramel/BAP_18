@@ -2,3 +2,29 @@
 
 @use 'variables';
 @use 'mixins';
+
+$primarycolor: #000;
+$secondarycolor: #A1A1AA;
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 15rem;
+    height: 15rem;
+}
+
+.titre {
+    display: flex;
+    justify-content: center;
+}
+
+.email, .password, .button {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    border-color: $secondarycolor;
+}
+
