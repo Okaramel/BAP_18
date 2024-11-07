@@ -1,10 +1,12 @@
 import express from "express";
-import userRouter from "./user.js";
+import adminRouter from "./admin.js";
 import loginRouter from "./login.js";
+import etiquetteRouter from "./etiquette.js";
 
 const router = express.Router();
 
-router.use("/users", userRouter);
+router.use("/admin", adminRouter);
 router.use("/login", loginRouter);
+router.use("/etiquette", etiquetteRouter);
 
 export default router;
