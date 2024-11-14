@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/main.scss"],"names":[],"mappings":"AASA,MACI,aACA,sBACA,uBACA,YACA,YACA,aAGJ,OACI,aACA,uBAGJ,yBACI,aACA,kBACA,WACA,aArBa","file":"style.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/main.scss","../scss/_variables.scss"],"names":[],"mappings":"AAKA,MACI,aACA,sBACA,uBACA,YACA,YACA,aAGJ,OACI,aACA,uBAGJ,yBACI,aACA,kBACA,WACA,aCrBM","file":"style.css"}

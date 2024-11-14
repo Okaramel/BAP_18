@@ -1,11 +1,7 @@
-// sass --watch FRONT/scss/main.scss FRONT/css/style.css --style=compressed
+// sass FRONT/scss/main.scss:FRONT/css/style.css --watch --style=compressed
 
 @use 'variables';
 @use 'mixins';
-
-$primarycolor: #000;
-$secondarycolor: #A1A1AA;
-
 
 .form {
     display: flex;
@@ -25,6 +21,6 @@ $secondarycolor: #A1A1AA;
     padding: 10px;
     border-radius: 5px;
     margin: 5px;
-    border-color: $secondarycolor;
+    border-color: variables.$primary;
 }
 
