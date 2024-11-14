@@ -1,41 +1,25 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-
 model Admin {
   id         Int       @id @default(autoincrement())
   email      String    @unique
   password   String
-
-  // Un seul admin pour l'application
 }
 
 model Mail {
   id         Int       @id @default(autoincrement())
   email      String    @unique
+  createdAt  DateTime  @default(now()) 
 }
-
 
 model Etiquette {
   id              Int       @id @default(autoincrement())
   slug            String    @unique
   image           String?
   video           String?
-  title           String     @unique
+  title           String    @unique
   description     String?
   qrcode          String?
   statut          EtiquetteStatus @default(en_cours)
+  tags            Tag[]     @relation("EtiquetteTags")
 }
 
 enum EtiquetteStatus {
@@ -43,16 +27,18 @@ enum EtiquetteStatus {
   termine
 }
 
-model Creator{
+model Creator {
   id              Int       @id @default(autoincrement())
+  name            String    @unique
   email           String    @unique
   linkedin        String?
   image           String?
 }
 
-model Tag{
+model Tag {
   id             Int       @id @default(autoincrement())
   slug           String    @unique
   name           String    @unique
-  description    String?   @db.VarChar(512)
+  description    String?
+  etiquettes     Etiquette[] @relation("EtiquetteTags")
 }

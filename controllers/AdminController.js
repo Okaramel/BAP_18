@@ -51,7 +51,7 @@ export async function deleteAdmin(req, res) {
 
         return res.status(200).json(admin);
     } catch (error) {
-        return res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ error: "Admin not found" });
     }
 }
 
@@ -70,6 +70,6 @@ export async function updateAdmin(req, res) {
         });
         return res.status(200).json(admin);
     } catch (error) {
-        return res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ error: "Admin not found" });
     }
 }
