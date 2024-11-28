@@ -5,7 +5,7 @@ export async function createAdmin(req, res) {
     try {
         const body = req.body;
 
-        // Vérifiez si l'utilisateur existe déjà
+        // vérifie si l'utilisateur existe déjà
         const existingAdmin = await prisma.admin.findUnique({
             where: {
                 email: body.email,

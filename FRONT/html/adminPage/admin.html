@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin</title>
+        <link rel="stylesheet" href="../../css/admin.css" />
+    </head>
+    <body>
+        <div class="admin-container">
+            <h1>Admin</h1>
+            <div class="card-container">
+                <div class="card">
+                    <h2>ETIQUETTES <button class="add-btn">+</button></h2>
+                    <div class="etiquette-card"></div>
+                </div>
+                <div class="card full-width">
+                    <h2>MAIL</h2>
+                    <div class="email-item">
+                        <div class="details-btn">Email</div>
+                        <button class="remove-btn">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="24px"
+                                viewBox="0 -960 960 960"
+                                width="24px"
+                                fill="#e8eaed"
+                            >
+                                <path d="M200-440v-80h560v80H200Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>
+                        CREATEURS
+                        <button class="add-btn" id="add-btn-creator">+</button>
+                    </h2>
+                    <div class="createur-card"></div>
+                </div>
+                <div class="card">
+                    <h2>
+                        TAG
+                        <button class="add-btn" id="add-btn-tag">+</button>
+                    </h2>
+                    <div class="tag-card"></div>
+                </div>
+            </div>
+        </div>
+
+        <!----------------------- ETIQUETTE FORM ---------------------->
+
+        <div class="overlay-etiquette" style="display: none">
+            <div class="popup-etiquette">
+                <h2 id="popup-title">Ajouter une étiquette</h2>
+                <form id="etiquette-form">
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Titre"
+                        required
+                    />
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Description"
+                        required
+                    ></textarea>
+                    <h3>Choix des créateurs</h3>
+                    <select id="creator_form" name="creator"></select>
+                    <select id="creator_form2" name="creator2"></select>
+                    <select id="creator_form3" name="creator3"></select>
+
+                    <h3>Choix des tags</h3>
+                    <select id="tag1" name="tag1"></select>
+                    <select id="tag2" name="tag2"></select>
+                    <select id="tag3" name="tag3"></select>
+                    <button type="submit" id="submit-btn">Ajouter</button>
+                </form>
+            </div>
+        </div>
+
+        <!----------------------- CREATORS FORM ---------------------->
+
+        <div class="overlay-creator" style="display: none">
+            <div class="popup-creator">
+                <h2 id="popup-title">Ajouter un créateur</h2>
+                <form id="creator-form">
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="NOM Prénom"
+                        required
+                    />
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                    />
+                    <input
+                        type="text"
+                        id="linkedin"
+                        name="linkedin"
+                        placeholder="Lien LinkedIn"
+                    />
+                    <input
+                        type="text"
+                        id="image"
+                        name="image"
+                        placeholder="Image URL"
+                    />
+                    <button type="submit" id="submit-btn">Ajouter</button>
+                </form>
+            </div>
+        </div>
+
+        <!----------------------- TAG FORM ---------------------->
+
+        <div class="overlay-tag" style="display: none">
+            <div class="popup-tag">
+                <h2 id="popup-title">Ajouter un tag</h2>
+                <form id="tag-form">
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Nom du tag"
+                        required
+                    />
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Description"
+                        required
+                    ></textarea>
+                    <button type="submit" id="submit-btn">Ajouter</button>
+                </form>
+            </div>
+        </div>
+
+        <!--------   POPUP DELETE     --------->
+
+        <div class="overlay-delete" style="display: none">
+            <div class="popup-delete">
+                <h1>Êtes-vous sûr de supprimer ?</h1>
+                <div class="btn">
+                    <button class="no">Non</button>
+                    <button class="yes">Oui</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="../../js/adminScript/Etiquettes/AddEtiquettes.js"></script>
+        <script src="../../js/adminScript/Etiquettes/EditDeleteEtiquettes.js"></script>
+        <script src="../../js/adminScript/Etiquettes/ShowCreatorForm.js"></script>
+        <script src="../../js/adminScript/Etiquettes/ShowTagsForm.js"></script>
+
+        <script src="../../js/adminScript/Creator/AddCreators.js"></script>
+        <script src="../../js/adminScript/Creator/EditDeleteCreators.js"></script>
+
+        <script src="../../js/adminScript/Tag/AddTags.js"></script>
+        <script src="../../js/adminScript/Tag/EditDeleteTags.js"></script>
+    </body>
+</html>

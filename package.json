@@ -5,13 +5,16 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "node --watch index.js"
+        "dev": "npm-run-all --parallel watch-node watch-sass",
+        "watch-node": "node --watch index.js",
+        "watch-sass": "sass --watch FRONT/css/admin.scss FRONT/css/admin.css"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "type": "module",
     "devDependencies": {
+        "npm-run-all": "^4.1.5",
         "prisma": "^5.22.0"
     },
     "dependencies": {

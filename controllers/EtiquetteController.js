@@ -1,76 +1,197 @@
 import prisma from "../config/prisma.js";
 
+// fonction pour récupérer toutes les étiquettes
 export async function getEtiquettes(req, res) {
     try {
-        const etiquette = await prisma.etiquette.findMany();
-        return res.status(200).send(etiquette);
+        const etiquettes = await prisma.etiquette.findMany({
+            include: {
+                creators: true, // inclure les créateurs associés
+                etiquettesTags: {
+                    include: {
+                        tag: true, // inclure les tags associés via EtiquetteTag
+                    },
+                },
+            },
+        });
+        return res.status(200).send(
+            etiquettes.map((etiquette) => ({
+                ...etiquette, //  ... = inclut toutes les propriétés de l'objet etiquette
+                tags: etiquette.etiquettesTags.map(
+                    // map pour transformer chaque élément de etiquettesTags en un objet avec la propriété tag
+                    (etiquetteTag) => etiquetteTag.tag
+                ),
+            }))
+        );
     } catch (error) {
+        console.error("Erreur lors de la récupération des étiquettes:", error);
         return res
             .status(500)
             .send("Erreur lors de la récupération des étiquettes");
     }
 }
 
-export async function createEtiquette(req, res) {
+// fonction pour récupérer une étiquette par ID
+export async function getEtiquetteById(req, res) {
     try {
-        const body = req.body;
-        const newEtiquette = await prisma.etiquette.create({
-            data: {
-                slug: body.slug,
-                image: body.image,
-                video: body.video,
-                title: body.title,
-                description: body.description,
-                qrcode: body.qrcode,
-                statut: body.statut,
+        const id = parseInt(req.params.id);
+        const etiquette = await prisma.etiquette.findUnique({
+            where: { id },
+            include: {
+                creators: true, // inclure les créateurs associés
+                etiquettesTags: {
+                    include: {
+                        tag: true, // inclure les tags associés via EtiquetteTag
+                    },
+                },
             },
         });
-        return res.status(201).send(newEtiquette);
+        if (!etiquette) {
+            return res.status(404).send("Étiquette non trouvée");
+        }
+        return res.status(200).send({
+            ...etiquette,
+            tags: etiquette.etiquettesTags.map(
+                (etiquetteTag) => etiquetteTag.tag
+            ),
+        });
     } catch (error) {
+        console.error("Erreur lors de la récupération de l'étiquette:", error);
+        return res
+            .status(500)
+            .send("Erreur lors de la récupération de l'étiquette");
+    }
+}
+// fonction pour créer une nouvelle étiquette
+export async function createEtiquette(req, res) {
+    try {
+        const {
+            slug,
+            image,
+            title,
+            description,
+            creatorId,
+            creators = [],
+            tags = [],
+        } = req.body;
+
+        const newEtiquette = await prisma.etiquette.create({
+            data: {
+                slug,
+                image,
+                title,
+                description,
+                creatorId,
+                creators: {
+                    connect: creators.map((creator) => ({ id: creator.id })), // connexion multiple pour chaque créateur sélectionné
+                },
+                etiquettesTags: {
+                    // créer des relations dans EtiquetteTag
+                    create: tags.map((tag) => ({
+                        tag: { connect: { id: tag.id } }, // connexion unique pour chaque tag sélectionné
+                    })),
+                },
+            },
+            include: {
+                creators: true, // inclure les créateurs
+                etiquettesTags: {
+                    include: { tag: true },
+                },
+            },
+        });
+        return res.status(201).send({
+            ...newEtiquette,
+            tags: newEtiquette.etiquettesTags.map(
+                (etiquetteTag) => etiquetteTag.tag
+            ),
+        });
+    } catch (error) {
+        console.error("Erreur lors de la création de l'étiquette :", error);
         return res
             .status(500)
             .send("Erreur lors de la création de l'étiquette");
     }
 }
 
+// fonction pour supprimer une étiquette
+
 export async function deleteEtiquette(req, res) {
     try {
-        const id = req.params.id;
-        const deleteEtiquette = await prisma.etiquette.delete({
+        const id = parseInt(req.params.id);
+
+        // supprimer les relations dans EtiquetteTag
+        await prisma.etiquetteTag.deleteMany({
             where: {
-                id: parseInt(id),
+                etiquetteId: id,
             },
         });
-        return res.status(200).send(deleteEtiquette);
+
+        // supprimer l'étiquette
+        const deletedEtiquette = await prisma.etiquette.delete({
+            where: {
+                id: id,
+            },
+        });
+
+        return res.status(200).send(deletedEtiquette);
     } catch (error) {
+        console.error("Erreur lors de la suppression de l'étiquette:", error);
         return res
             .status(500)
             .send("Erreur lors de la suppression de l'étiquette");
     }
 }
 
+// fonction pour mettre à jour une étiquette
 export async function updateEtiquette(req, res) {
     try {
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
         const body = req.body;
-        const updateEtiquette = await prisma.etiquette.update({
+        console.log("Request body:", body); // log du corps de la requête
+
+        const updatedEtiquette = await prisma.etiquette.update({
             where: {
-                id: parseInt(id),
+                id: id,
             },
             data: {
                 slug: body.slug,
                 image: body.image,
-                video: body.video,
                 title: body.title,
                 description: body.description,
-                qrcode: body.qrcode,
-                statut: body.statut,
+                creators: {
+                    set: [], // supprimer toutes les relations existantes
+                    connect: body.creators.map((creator) => ({
+                        // connexion multiple des créateurs sélectionnés
+                        id: creator.id,
+                    })),
+                },
+                etiquettesTags: {
+                    deleteMany: {}, // supprimer toutes les relations existantes
+                    create: body.tags.map((tag) => ({
+                        // créer de nouvelles relations
+                        tag: { connect: { id: tag.id } },
+                    })),
+                },
+            },
+            include: {
+                creators: true,
+                etiquettesTags: {
+                    // inclure les tags associés via EtiquetteTag
+                    include: {
+                        tag: true,
+                    },
+                },
             },
         });
-        return res.status(200).send(updateEtiquette);
-    } catch {
+        return res.status(200).send({
+            ...updatedEtiquette,
+            tags: updatedEtiquette.etiquettesTags.map(
+                (etiquetteTag) => etiquetteTag.tag // inclure les tags associés via EtiquetteTag
+            ),
+        });
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'étiquette:", error); // log des erreurs
         return res
             .status(500)
-            .send("Erreur lors de la mise à jour de l'étiquette");
+            .json({ error: "Erreur lors de la mise à jour de l'étiquette" });
     }
 }

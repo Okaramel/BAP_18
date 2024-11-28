@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -15,38 +16,48 @@ model Admin {
 model Mail {
   id         Int       @id @default(autoincrement())
   email      String    @unique
-  createdAt  DateTime  @default(now()) 
+  type       MailType
+  createdAt  DateTime  @default(now())
+}
+
+enum MailType {
+  entreprise
+  particulier
 }
 
 model Etiquette {
-  id              Int       @id @default(autoincrement())
-  slug            String    @unique
-  image           String?
-  video           String?
-  title           String    @unique
+  id              Int            @id @default(autoincrement())
+  slug            String         @unique
+  title           String         @unique
   description     String?
-  qrcode          String?
-  statut          EtiquetteStatus @default(en_cours)
-  tags            Tag[]     @relation("EtiquetteTags")
-}
-
-enum EtiquetteStatus {
-  en_cours
-  termine
+  creatorId       Int
+  creators Creator[] @relation("EtiquetteCreators") 
+  image           String?
+  etiquettesTags  EtiquetteTag[] 
 }
 
 model Creator {
-  id              Int       @id @default(autoincrement())
-  name            String    @unique
-  email           String    @unique
+  id              Int            @id @default(autoincrement())
+  name            String         @unique
+  email           String         @unique
   linkedin        String?
   image           String?
+  etiquettes Etiquette[] @relation("EtiquetteCreators")
 }
 
 model Tag {
-  id             Int       @id @default(autoincrement())
-  slug           String    @unique
-  name           String    @unique
+  id             Int            @id @default(autoincrement())
+  slug           String         @unique
+  name           String         @unique
   description    String?
-  etiquettes     Etiquette[] @relation("EtiquetteTags")
+  etiquettesTags EtiquetteTag[] 
+}
+
+model EtiquetteTag {
+  etiquetteId  Int
+  tagId        Int
+  etiquette    Etiquette @relation(fields: [etiquetteId], references: [id])
+  tag          Tag       @relation(fields: [tagId], references: [id])
+
+  @@id([etiquetteId, tagId]) 
 }
