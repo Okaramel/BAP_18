@@ -1,4 +1,4 @@
-@use 'variables';
+@use "variables";
 
 .header {
     height: 100dvh;
@@ -9,16 +9,8 @@
         color: variables.$white;
     }
 
-    &_title {
-        font-size: 3rem;
-        font-weight: 800;
-    }
-
-    &_subtitle {
-        font-size: 1.5rem;
-    }
-
     &_text {
+        max-width: 800px;
         color: variables.$grey;
     }
 }
