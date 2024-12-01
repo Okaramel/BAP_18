@@ -15,6 +15,14 @@ router.get("/", (req, res) => {
     res.render("index", { title: "Home" });
 });
 
+router.get("/console", (req, res) => {
+    res.render("admin", { title: "Admin Console" });
+});
+
+router.get("/consoleLogin", (req, res) => {
+    res.render("loginAdmin", { title: "Admin Login" });
+});
+
 ////////////////////
 // BACK
 
