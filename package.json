@@ -7,7 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "npm-run-all --parallel watch-node watch-sass",
         "watch-node": "node --watch index.js",
-        "watch-sass": "sass --watch FRONT/css/admin.scss FRONT/css/admin.css"
+        "watch-sass": "sass --watch FRONT/scss/etiquettePage.scss FRONT/css/etiquettePage.css"
     },
     "keywords": [],
     "author": "",
@@ -24,7 +24,9 @@
         "ejs": "^3.1.10",
         "express": "^4.21.1",
         "jsonwebtoken": "^9.0.2",
+        "multer": "^1.4.5-lts.1",
         "nodemailer": "^6.9.16",
-        "npm": "^10.9.0"
+        "npm": "^10.9.0",
+        "path": "^0.12.7"
     }
 }

@@ -6,8 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.set("view engine", "ejs");          // use ejs as renderer
-app.use(express.static("./public"));    // use express.static to serve static files for frontend
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(router);
 
