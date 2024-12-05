@@ -207,7 +207,7 @@ body {
 .popup-tag h3 {
   margin-bottom: 10px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
 }
 .popup-etiquette form,
 .popup-creator form,
@@ -235,8 +235,8 @@ body {
 .popup-tag form input,
 .popup-tag form textarea,
 .popup-tag form select {
-  margin-bottom: 15px;
-  padding: 10px;
+  margin-bottom: 10px;
+  padding: 6px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
   font-size: 12px;
@@ -252,6 +252,14 @@ body {
   flex-direction: column;
   margin-left: 24px;
   width: 740px;
+}
+.popup-etiquette .select-content hr {
+  background-color: black;
+  width: 70%;
+  opacity: 0.5;
+  margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .popup-delete {

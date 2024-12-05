@@ -6,7 +6,6 @@ import creatorRouter from "./creator.js";
 import tagRouter from "./tag.js";
 import mailRouter from "./mail.js";
 import innovationRouter from "./innovation.js";
-import uploadRouter from "./upload.js"; // Importer le routeur d'upload
 
 const router = express.Router();
 
@@ -17,6 +16,5 @@ router.use("/creator", creatorRouter);
 router.use("/tag", tagRouter);
 router.use("/mail", mailRouter);
 router.use("/innovation", innovationRouter);
-router.use("/upload", uploadRouter); // Utiliser le routeur d'upload
 
 export default router;

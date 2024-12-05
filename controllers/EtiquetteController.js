@@ -61,40 +61,59 @@ export async function getEtiquetteById(req, res) {
             .send("Erreur lors de la récupération de l'étiquette");
     }
 }
-// fonction pour créer une nouvelle étiquette
+
+// Fonction pour créer une nouvelle étiquette
 export async function createEtiquette(req, res) {
     try {
         const {
             slug,
-            image,
-            titleProject,
+            title,
             description,
-            logo,
-            background,
             titleContainer1,
             descriptionContainer1,
             titleContainer2,
             descriptionContainer2,
-            imageContainer2,
             titleContainer3,
             descriptionContainer3,
-            imageContainer3,
-            bannerImage,
-            quoteBanner,
             titleContainer4,
             descriptionContainer4,
-            imageContainer4,
             creatorId,
             creators = [],
             tags = [],
-            innovation = [],
         } = req.body;
+
+        const logo = req.files["logo"]
+            ? path.join("uploads/images", req.files["logo"][0].filename)
+            : null;
+        const background = req.files["background"]
+            ? path.join("uploads/images", req.files["background"][0].filename)
+            : null;
+        const imageContainer2 = req.files["imageContainer2"]
+            ? path.join(
+                  "uploads/images",
+                  req.files["imageContainer2"][0].filename
+              )
+            : null;
+        const imageContainer3 = req.files["imageContainer3"]
+            ? path.join(
+                  "uploads/images",
+                  req.files["imageContainer3"][0].filename
+              )
+            : null;
+        const imageContainer4 = req.files["imageContainer4"]
+            ? path.join(
+                  "uploads/images",
+                  req.files["imageContainer4"][0].filename
+              )
+            : null;
+        const bannerImage = req.files["bannerImage"]
+            ? path.join("uploads/images", req.files["bannerImage"][0].filename)
+            : null;
 
         const newEtiquette = await prisma.etiquette.create({
             data: {
                 slug,
-                image,
-                titleProject,
+                title,
                 description,
                 logo,
                 background,
@@ -107,33 +126,24 @@ export async function createEtiquette(req, res) {
                 descriptionContainer3,
                 imageContainer3,
                 bannerImage,
-                quoteBanner,
                 titleContainer4,
                 descriptionContainer4,
                 imageContainer4,
                 creatorId,
                 creators: {
-                    connect: creators.map((creator) => ({ id: creator.id })), // connexion multiple pour chaque créateur sélectionné
+                    connect: creators.map((creator) => ({ id: creator.id })), // Connexion multiple pour chaque créateur sélectionné
                 },
                 etiquettesTags: {
-                    // créer des relations dans EtiquetteTag
+                    // Créer des relations dans EtiquetteTag
                     create: tags.map((tag) => ({
-                        tag: { connect: { id: tag.id } }, // connexion unique pour chaque tag sélectionné
+                        tag: { connect: { id: tag.id } }, // Connexion unique pour chaque tag sélectionné
                     })),
-                    etiquettesInnovations: {
-                        create: innovation.map((innovation) => ({
-                            innovation: { connect: { id: innovation.id } }, // connexion unique pour chaque innovation sélectionné
-                        })),
-                    },
                 },
             },
             include: {
-                creators: true, // inclure les créateurs
+                creators: true, // Inclure les créateurs
                 etiquettesTags: {
                     include: { tag: true },
-                },
-                etiquettesInnovations: {
-                    include: { innovation: true },
                 },
             },
         });
@@ -150,7 +160,6 @@ export async function createEtiquette(req, res) {
             .send("Erreur lors de la création de l'étiquette");
     }
 }
-
 // fonction pour supprimer une étiquette
 
 export async function deleteEtiquette(req, res) {
