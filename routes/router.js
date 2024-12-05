@@ -18,19 +18,27 @@ router.get("/", (req, res) => {
 });
 
 router.get("/console", (req, res) => {
-    res.render("admin", { title: "Admin Console" });
+    res.render("adminPage/admin", { title: "Admin Console" });
 });
 
 router.get("/consoleLogin", (req, res) => {
-    res.render("loginAdmin", { title: "Admin Login" });
+    res.render("adminPage/loginAdmin", { title: "Admin Login" });
 });
 
 router.get("/email", (req, res) => {
-    res.render("email", { title: "Login" });
+    res.render("email", { title: "Email" });
 });
 
 router.get("/code", (req, res) => {
-    res.render("code", { title: "Signup" });
+    res.render("code", { title: "Code" });
+});
+
+router.get("/etiquette/:id", (req, res) => {
+    res.render("etiquettePage/etiquettePage", { title: "Project" });
+});
+
+router.get("/newsletter", (req, res) => {
+    res.render("email/newsletter", { title: "Newsletter" });
 });
 
 ////////////////////
