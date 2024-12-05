@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/index.css">
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+
+        <header class="header">
+            <h1 class="header_title">Innovations</h1>
+            <h2 class="header_subtitle">Academic Programs, Innovation and Research</h2>
+            <p class="header_text">Our academic programs develop both soft and hard skills in a trans-disciplinary setting where students collaborate with researchers and PhD students. We use radical learning (experience before theory), anti-disciplinarity (integrated knowledge for creativity), and collective intelligence (community-driven innovation) to promote autonomy and initiative. Inspired by the MIT Media Lab's *Demo or Die*, we explore design at the intersection of AI, cobotics, human-computer interfaces, and biotech. We validate our work through studies, product launches, publications, and partnerships, aiming to create technology that addresses climate action, healthcare, accessibility, and education.</p>
+
+            <form action="" class="header_search">
+                <input type="text" name="" id="" placeholder="Search a project" />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </header>
+
+        <main>
+            <section class="section">
+                <h3 class="section_title">Projets d'Innovation</h3>
+                <div class="section_container">
+                    <article class="section_article">
+                        <a href="#" class="article_img"><img src="/img/iisr0c4p7nrtgtu0y71xuruy2xzlhk.jpg" alt="" /></a>
+                        <div class="article_text">
+                            <a href="#" class="article_title"><h4>Autonomous Aquaponic Platform</h4></a>
+                            <p class="article_description">Development of an automated, modular, adjustable and educational aquaponic platform</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <%- include('./partials/footer.ejs') %>
+
+        <script src="/js/script.js"></script>
+    </body>
+</html>

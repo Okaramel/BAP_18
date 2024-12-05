@@ -1,14 +1,15 @@
-// sass FRONT/scss/main.scss:FRONT/css/style.css --watch --style=compressed
+// sass public/scss/main.scss:public/css/main.css --watch --style=compressed
 
 @use "variables";
 @use "mixins";
 @use "navbar";
 @use "header";
+@use "footer";
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 :root {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 * {
@@ -24,10 +25,14 @@ body {
     padding: 0;
 }
 
+body {
+    width: 100%;
+}
+
 // Titles and Text
 
 h1 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     font-weight: 800;
 }
 
@@ -37,40 +42,48 @@ h2 {
 }
 
 h3 {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    font-weight: 800;
 }
 
 h4 {
     font-size: 1.5rem;
+    font-weight: 750;
 }
 
 p {
     font-size: 1rem;
 }
 
-a, a:link, a:active, a:visited {
+// Anchors
+
+a,
+a:link,
+a:active,
+a:visited {
+    color: variables.$black;
     text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
-.form {
+// Header common properties
+
+.header {
+    height: 100dvh;
+    padding: 13.5rem 8rem 6rem 8rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    width: 15rem;
-    height: 15rem;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+
+    & > * {
+        margin: 0;
+        color: variables.$white;
+    }
 }
 
-.titre {
-    display: flex;
-    justify-content: center;
-}
-
-.email,
-.password,
-.button {
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
-    border-color: variables.$primary;
+i {
+    padding: 0;
 }

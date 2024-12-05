@@ -1,0 +1,37 @@
+@use "variables";
+// sass public/scss/email.scss:public/css/email.css --watch --style=compressed
+
+.header {
+    padding: 0 8rem;
+    align-items: flex-end;
+    justify-content: center;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/img/email_header.png"), rgb(0, 0, 0);
+
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &_email {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+
+        & * {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        & button {
+            background-color: variables.$darkgrey;
+            color: variables.$white;
+            font-weight: 600;
+        
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

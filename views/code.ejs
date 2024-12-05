@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/email.css">
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+
+        <header class="header">
+            <h1>Code </h1>
+            <p>Please enter the code you've received to continue</p>
+            <form action="" class="header_email">
+                <input type="number" inputmode="numeric" name="email" id="email" placeholder="Code" />
+                <!-- <button type="submit">Send <i class="fa-solid fa-paper-plane"></i></button> -->
+                <button type="submit">Send</i></button>
+            </form>
+        </header>
+
+        <%- include('./partials/footer.ejs') %>
+
+        <script src="/js/script.js"></script>
+    </body>
+</html>

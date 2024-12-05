@@ -11,6 +11,29 @@ import uploadRouter from "./upload.js"; // Importer le routeur d'upload
 const router = express.Router();
 
 ////////////////////
+// FRONT
+
+router.get("/", (req, res) => {
+    res.render("index", { title: "Home" });
+});
+
+router.get("/console", (req, res) => {
+    res.render("admin", { title: "Admin Console" });
+});
+
+router.get("/consoleLogin", (req, res) => {
+    res.render("loginAdmin", { title: "Admin Login" });
+});
+
+router.get("/email", (req, res) => {
+    res.render("email", { title: "Login" });
+});
+
+router.get("/code", (req, res) => {
+    res.render("code", { title: "Signup" });
+});
+
+////////////////////
 // BACK
 
 router.use("/admin", adminRouter);

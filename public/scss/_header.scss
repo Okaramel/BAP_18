@@ -2,15 +2,56 @@
 
 .header {
     height: 100dvh;
-    padding: 10rem 18.25rem 0 18.25rem;
+    padding: 13.5rem 8rem 6rem 8rem;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
     background: variables.$black;
 
     & * {
+        margin: 0;
         color: variables.$white;
     }
 
     &_text {
-        max-width: 800px;
         color: variables.$grey;
+
+        @media screen and (min-width: 1920px) {
+            max-width: 74%;
+        }
+    }
+
+    &_search {
+        margin-top: auto;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        & input {
+            width: 15rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        & button {
+            height: 100%;
+            aspect-ratio: 1/1;
+            background-color: variables.$white;
+            border: none;
+            border-radius: 0.5rem;
+
+            & * {
+                font-size: 1rem;
+                color: variables.$black;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
 }
