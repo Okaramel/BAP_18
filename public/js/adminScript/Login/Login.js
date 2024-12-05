@@ -24,7 +24,7 @@ form.addEventListener("submit", async (event) => {
         window.localStorage.setItem("adminEmail", adminEmail);
         window.localStorage.setItem("adminId", adminId);
 
-        window.location.href = "../../html/adminPage/admin.html";
+        window.location.href = "/console";
     } catch (error) {
         displayErrorMessage("Mauvais email ou mot de passe");
     }

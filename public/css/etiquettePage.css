@@ -1,14 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 .navbar {
   position: fixed;
+  z-index: 99;
   inset: 0 0 auto 0;
   height: 64px;
-  padding: 0 18.25rem;
+  padding: 0 8rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: hsl(0, 0%, 98%);
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 -5px 20px 0px hsl(0, 0%, 2%);
 }
 .navbar_logo {
   height: 80%;
@@ -25,21 +28,58 @@
   list-style: none;
 }
 .navbar a {
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: hsl(0, 0%, 2%);
 }
 
 .header {
   height: 100dvh;
-  padding: 10rem 18.25rem 0 18.25rem;
+  padding: 13.5rem 8rem 6rem 8rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.5rem;
   background: hsl(0, 0%, 2%);
 }
 .header * {
+  margin: 0;
   color: hsl(0, 0%, 98%);
 }
 .header_text {
-  max-width: 800px;
   color: hsl(0, 0%, 65%);
+}
+@media screen and (min-width: 1920px) {
+  .header_text {
+    max-width: 74%;
+  }
+}
+.header_search {
+  margin-top: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.header_search input {
+  width: 15rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+}
+.header_search button {
+  height: 100%;
+  aspect-ratio: 1/1;
+  background-color: hsl(0, 0%, 98%);
+  border: none;
+  border-radius: 0.5rem;
+}
+.header_search button * {
+  font-size: 1rem;
+  color: hsl(0, 0%, 2%);
+}
+.header_search button:hover {
+  cursor: pointer;
 }
 
 :root {
@@ -168,7 +208,6 @@ a:visited {
   flex-direction: column;
 }
 .main-container .first-container {
-  background-color: rgb(216, 216, 216);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -268,6 +307,11 @@ a:visited {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.7;
+}
+
+hr {
+  border: 0.1 solid #000;
+  width: 70%;
 }
 
 /*# sourceMappingURL=etiquettePage.css.map */
