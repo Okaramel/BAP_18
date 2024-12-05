@@ -2,14 +2,17 @@
 
 .navbar {
     position: fixed;
+    z-index: 99;
     inset: 0 0 auto 0;
     height: 64px;
-    padding: 0 18.25rem;
+    padding: 0 8rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     background-color: variables.$white;
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-shadow: 0 -5px 20px 0px variables.$black;
 
     &_logo {
         height: 80%;
@@ -29,7 +32,7 @@
     }
 
     & a {
-        font-size: 0.75rem;
+        font-size: 1rem;
         color: variables.$black;
     }
 }

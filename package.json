@@ -5,9 +5,9 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "npm-run-all --parallel watch-node watch-sass",
+        "dev": "npm-run-all --parallel watch-node watch-main",
         "watch-node": "node --watch index.js",
-        "watch-sass": "sass --watch FRONT/scss/admin.scss FRONT/css/admin.css"
+        "watch-main": "sass --watch public/scss/main.scss public/css/style.css"
     },
     "keywords": [],
     "author": "",
