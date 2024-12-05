@@ -4,7 +4,7 @@ import upload from "../middleware/Multer.js";
 const router = express.Router();
 
 // Route pour gérer les uploads
-router.post("/", upload.single("file"), (req, res) => {
+router.post("/", upload.single("image"), (req, res) => {
     try {
         // Le fichier est accessible via req.file
         res.status(200).json({

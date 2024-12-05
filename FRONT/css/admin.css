@@ -79,16 +79,11 @@ body {
 .admin-container .card .email-item .action-btn,
 .admin-container .card .creator-item .action-btn,
 .admin-container .card .tag-item .action-btn {
+  display: flex;
+  justify-content: flex-end;
   flex: 1;
   font-size: 16px;
   border-radius: 5px;
-}
-.admin-container .card .etiquette-item .action-btn,
-.admin-container .card .email-item .action-btn,
-.admin-container .card .creator-item .action-btn,
-.admin-container .card .tag-item .action-btn {
-  display: flex;
-  justify-content: flex-end;
 }
 .admin-container .card .etiquette-item .edit-btn,
 .admin-container .card .etiquette-item .remove-btn,
@@ -137,6 +132,25 @@ body {
   align-items: center;
   z-index: 1000;
 }
+.overlay-etiquette button,
+.overlay-creator button,
+.overlay-tag button,
+.overlay-delete button {
+  background-color: #088083;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+.overlay-etiquette button:hover,
+.overlay-creator button:hover,
+.overlay-tag button:hover,
+.overlay-delete button:hover {
+  background-color: #066666;
+}
 .overlay-etiquette .errorCreator,
 .overlay-creator .errorCreator,
 .overlay-tag .errorCreator,
@@ -161,7 +175,7 @@ body {
   max-width: 400px;
   position: relative;
   z-index: 1001;
-  width: 320px;
+  width: 370px;
 }
 .popup-etiquette .close-btn,
 .popup-creator .close-btn,
@@ -192,12 +206,19 @@ body {
 .popup-creator h3,
 .popup-tag h3 {
   margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 14px;
 }
 .popup-etiquette form,
 .popup-creator form,
 .popup-tag form {
   display: flex;
   flex-direction: column;
+}
+.popup-etiquette form .main-content,
+.popup-creator form .main-content,
+.popup-tag form .main-content {
+  width: 700px;
 }
 .popup-etiquette form label,
 .popup-creator form label,
@@ -218,24 +239,19 @@ body {
   padding: 10px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 12px;
   width: 100%;
 }
-.popup-etiquette form button,
-.popup-creator form button,
-.popup-tag form button {
-  background-color: #088083;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+
+.popup-etiquette form {
+  display: flex;
+  flex-direction: row;
 }
-.popup-etiquette form button:hover,
-.popup-creator form button:hover,
-.popup-tag form button:hover {
-  background-color: #066666;
+.popup-etiquette .select-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  width: 740px;
 }
 
 .popup-delete {

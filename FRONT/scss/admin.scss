@@ -78,14 +78,11 @@ body {
             }
 
             .action-btn {
+                display: flex;
+                justify-content: flex-end;
                 flex: 1;
                 font-size: 16px;
                 border-radius: 5px;
-            }
-
-            .action-btn {
-                display: flex;
-                justify-content: flex-end;
             }
 
             .edit-btn,
@@ -125,6 +122,20 @@ body {
     align-items: center;
     z-index: 1000;
 
+    button {
+        background-color: #088083;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+
+        &:hover {
+            background-color: #066666;
+        }
+    }
     .errorCreator {
         margin-bottom: 8px;
         padding: 10px 20px;
@@ -147,7 +158,7 @@ body {
     max-width: 400px;
     position: relative;
     z-index: 1001;
-    width: 320px;
+    width: 370px;
 
     .close-btn {
         position: absolute;
@@ -173,11 +184,17 @@ body {
 
     h3 {
         margin-bottom: 10px;
+        font-weight: 500;
+        font-size: 14px;
     }
 
     form {
         display: flex;
         flex-direction: column;
+
+        .main-content {
+            width: 700px;
+        }
 
         label {
             margin-bottom: 5px;
@@ -191,22 +208,22 @@ body {
             padding: 10px;
             border: 1px solid #dbdbdb;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 12px;
             width: 100%;
         }
-        button {
-            background-color: #088083;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+    }
+}
 
-            &:hover {
-                background-color: #066666;
-            }
-        }
+.popup-etiquette {
+    form {
+        display: flex;
+        flex-direction: row;
+    }
+    .select-content {
+        display: flex;
+        flex-direction: column;
+        margin-left: 24px;
+        width: 740px;
     }
 }
 

@@ -48,40 +48,62 @@
             </div>
         </div>
 
-        <!----------------------- ETIQUETTE FORM ---------------------->
+        <!--- ETIQUETTE FORM -->
 
         <div class="overlay-etiquette" style="display: none">
             <div class="popup-etiquette">
                 <h2 id="popup-title">Ajouter une étiquette</h2>
                 <form id="etiquette-form">
-                    <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        placeholder="Titre"
-                        required
-                    />
-                    <textarea
-                        id="description"
-                        name="description"
-                        placeholder="Description"
-                        required
-                    ></textarea>
-                    <h3>Choix des créateurs</h3>
-                    <select id="creator_form" name="creator"></select>
-                    <select id="creator_form2" name="creator2"></select>
-                    <select id="creator_form3" name="creator3"></select>
+                    <div class="main-content">
+                        <h3>Titre du projet</h3>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Titre du projet"
+                            required
+                        />
+                        <h3>Logo</h3>
+                        <input type="file" name="image" id="image" />
+                        <img
+                            id="image-preview"
+                            src="#"
+                            alt="Prévisualisation de l'image"
+                            style="
+                                display: none;
+                                max-width: 100%;
+                                height: auto;
+                                margin-bottom: 10px;
+                            "
+                        />
+                        <h3>Description</h3>
+                        <textarea
+                            id="description"
+                            name="description"
+                            placeholder="Description"
+                            required
+                        ></textarea>
+                    </div>
+                    <div class="select-content">
+                        <h3>Choix des créateurs</h3>
+                        <select id="creator_form" name="creator"></select>
+                        <select id="creator_form2" name="creator2"></select>
+                        <select id="creator_form3" name="creator3"></select>
 
-                    <h3>Choix des tags</h3>
-                    <select id="tag1" name="tag1"></select>
-                    <select id="tag2" name="tag2"></select>
-                    <select id="tag3" name="tag3"></select>
-                    <button type="submit" id="submit-btn">Ajouter</button>
+                        <h3>Choix des tags</h3>
+                        <select id="tag1" name="tag1"></select>
+                        <select id="tag2" name="tag2"></select>
+                        <select id="tag3" name="tag3"></select>
+
+                        <h3>Choix de l'innovation</h3>
+                        <select id="innovation" name="innovation"></select>
+                    </div>
                 </form>
+                <button type="submit" id="submit-btn">Ajouter</button>
             </div>
         </div>
 
-        <!----------------------- CREATORS FORM ---------------------->
+        <!--- CREATORS FORM -->
 
         <div class="overlay-creator" style="display: none">
             <div class="popup-creator">
@@ -118,7 +140,7 @@
             </div>
         </div>
 
-        <!----------------------- TAG FORM ---------------------->
+        <!--- TAG FORM -->
 
         <div class="overlay-tag" style="display: none">
             <div class="popup-tag">
@@ -142,7 +164,7 @@
             </div>
         </div>
 
-        <!--------   POPUP DELETE     --------->
+        <!---  POPUP DELETE  -->
 
         <div class="overlay-delete" style="display: none">
             <div class="popup-delete">
@@ -158,11 +180,14 @@
         <script src="../../js/adminScript/Etiquettes/EditDeleteEtiquettes.js"></script>
         <script src="../../js/adminScript/Etiquettes/ShowCreatorForm.js"></script>
         <script src="../../js/adminScript/Etiquettes/ShowTagsForm.js"></script>
+        <script src="../../js/adminScript/Etiquettes/ShowInnovationForm.js"></script>
 
         <script src="../../js/adminScript/Creator/AddCreators.js"></script>
         <script src="../../js/adminScript/Creator/EditDeleteCreators.js"></script>
 
         <script src="../../js/adminScript/Tag/AddTags.js"></script>
         <script src="../../js/adminScript/Tag/EditDeleteTags.js"></script>
+
+        <script src="../../js/adminScript/Other/image-preview.js"></script>
     </body>
 </html>

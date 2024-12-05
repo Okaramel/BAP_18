@@ -7,7 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "npm-run-all --parallel watch-node watch-sass",
         "watch-node": "node --watch index.js",
-        "watch-sass": "sass --watch FRONT/scss/etiquettePage.scss FRONT/css/etiquettePage.css"
+        "watch-sass": "sass --watch FRONT/scss/admin.scss FRONT/css/admin.css"
     },
     "keywords": [],
     "author": "",

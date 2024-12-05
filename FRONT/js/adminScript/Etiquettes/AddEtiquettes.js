@@ -22,8 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = {
             slug: formData.get("title").toLowerCase().replace(/\s+/g, "-"),
             image: formData.get("image"),
-            title: formData.get("title"),
+            titleProject: formData.get("title"),
             description: formData.get("description"),
+            logo: formData.get("logo"),
+            background: formData.get("background"),
             creatorId: parseInt(formData.get("creator")), // S'assurer que l'ID du créateur est transmis
             creators: [
                 { id: parseInt(formData.get("creator")) },
@@ -35,6 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 { id: parseInt(formData.get("tag2")) },
                 { id: parseInt(formData.get("tag3")) },
             ].filter((tag) => !isNaN(tag.id)), // Enlever les tags non sélectionnés
+            innovations: [{ id: parseInt(formData.get("innovation")) }].filter(
+                (innovation) => !isNaN(innovation.id)
+            ), // Enlever les innovations non sélectionnées
         };
 
         // Vérifier l'ID du créateur avant d'envoyer la requête
