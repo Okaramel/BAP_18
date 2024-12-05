@@ -3,6 +3,10 @@
 
 .header {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/index_header.webp");
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     
     &_text {
         color: variables.$grey;
