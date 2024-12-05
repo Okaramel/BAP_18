@@ -53,7 +53,7 @@
         <div class="overlay-etiquette" style="display: none">
             <div class="popup-etiquette">
                 <h2 id="popup-title">Ajouter une étiquette</h2>
-                <form id="etiquette-form">
+                <form id="etiquette-form" enctype="multipart/form-data">
                     <div class="main-content">
                         <h3>Titre du projet</h3>
                         <input
@@ -63,8 +63,8 @@
                             placeholder="Titre du projet"
                             required
                         />
-                        <h3>Logo</h3>
-                        <input type="file" name="image" id="image" />
+                        <h3>Background</h3>
+                        <input type="file" name="background" id="background" />
                         <img
                             id="image-preview"
                             src="#"
