@@ -1,0 +1,16 @@
+@use "variables";
+
+.header {
+    height: 100dvh;
+    padding: 10rem 18.25rem 0 18.25rem;
+    background: variables.$black;
+
+    & * {
+        color: variables.$white;
+    }
+
+    &_text {
+        max-width: 800px;
+        color: variables.$grey;
+    }
+}

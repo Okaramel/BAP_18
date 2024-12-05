@@ -67,19 +67,50 @@ export async function createEtiquette(req, res) {
         const {
             slug,
             image,
-            title,
+            titleProject,
             description,
+            logo,
+            background,
+            titleContainer1,
+            descriptionContainer1,
+            titleContainer2,
+            descriptionContainer2,
+            imageContainer2,
+            titleContainer3,
+            descriptionContainer3,
+            imageContainer3,
+            bannerImage,
+            quoteBanner,
+            titleContainer4,
+            descriptionContainer4,
+            imageContainer4,
             creatorId,
             creators = [],
             tags = [],
+            innovation = [],
         } = req.body;
 
         const newEtiquette = await prisma.etiquette.create({
             data: {
                 slug,
                 image,
-                title,
+                titleProject,
                 description,
+                logo,
+                background,
+                titleContainer1,
+                descriptionContainer1,
+                titleContainer2,
+                descriptionContainer2,
+                imageContainer2,
+                titleContainer3,
+                descriptionContainer3,
+                imageContainer3,
+                bannerImage,
+                quoteBanner,
+                titleContainer4,
+                descriptionContainer4,
+                imageContainer4,
                 creatorId,
                 creators: {
                     connect: creators.map((creator) => ({ id: creator.id })), // connexion multiple pour chaque créateur sélectionné
@@ -89,12 +120,20 @@ export async function createEtiquette(req, res) {
                     create: tags.map((tag) => ({
                         tag: { connect: { id: tag.id } }, // connexion unique pour chaque tag sélectionné
                     })),
+                    etiquettesInnovations: {
+                        create: innovation.map((innovation) => ({
+                            innovation: { connect: { id: innovation.id } }, // connexion unique pour chaque innovation sélectionné
+                        })),
+                    },
                 },
             },
             include: {
                 creators: true, // inclure les créateurs
                 etiquettesTags: {
                     include: { tag: true },
+                },
+                etiquettesInnovations: {
+                    include: { innovation: true },
                 },
             },
         });
