@@ -2,6 +2,8 @@
 // sass public/scss/index.scss:public/css/index.css --watch --style=compressed
 
 .header {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/index_header.webp");
+    
     &_text {
         color: variables.$grey;
 

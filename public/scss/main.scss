@@ -76,7 +76,10 @@ a:visited {
     display: flex;
     flex-flow: column nowrap;
     gap: 1.5rem;
-    background: variables.$black;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     & > * {
         margin: 0;
