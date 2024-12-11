@@ -61,93 +61,88 @@ export async function getEtiquetteById(req, res) {
             .send("Erreur lors de la récupération de l'étiquette");
     }
 }
+
 // fonction pour créer une nouvelle étiquette
 export async function createEtiquette(req, res) {
     try {
         const {
-            slug,
-            image,
             titleProject,
             description,
-            logo,
-            background,
             titleContainer1,
             descriptionContainer1,
             titleContainer2,
             descriptionContainer2,
-            imageContainer2,
             titleContainer3,
             descriptionContainer3,
-            imageContainer3,
-            bannerImage,
-            quoteBanner,
             titleContainer4,
             descriptionContainer4,
-            imageContainer4,
             creatorId,
             creators = [],
             tags = [],
-            innovation = [],
+            innovation, // une seule valeur, pas un tableau
         } = req.body;
+
+        // Récupérer le chemin du fichier téléchargé
+        const background = req.file ? req.file.path : null;
+
+        // Générer le slug à partir du titre
+        const slug = titleProject.toLowerCase().replace(/\s+/g, "-");
 
         const newEtiquette = await prisma.etiquette.create({
             data: {
                 slug,
-                image,
                 titleProject,
-                description,
-                logo,
-                background,
+                descriptionProject: description,
+                background, // Stocker le chemin de l'image
                 titleContainer1,
                 descriptionContainer1,
                 titleContainer2,
                 descriptionContainer2,
-                imageContainer2,
                 titleContainer3,
                 descriptionContainer3,
-                imageContainer3,
-                bannerImage,
-                quoteBanner,
                 titleContainer4,
                 descriptionContainer4,
-                imageContainer4,
-                creatorId,
+                creatorId: parseInt(creatorId),
                 creators: {
-                    connect: creators.map((creator) => ({ id: creator.id })), // connexion multiple pour chaque créateur sélectionné
+                    connect: creators.map((creator) => ({
+                        id: parseInt(creator),
+                    })),
                 },
                 etiquettesTags: {
-                    // créer des relations dans EtiquetteTag
                     create: tags.map((tag) => ({
-                        tag: { connect: { id: tag.id } }, // connexion unique pour chaque tag sélectionné
+                        tag: { connect: { id: parseInt(tag) } },
                     })),
-                    etiquettesInnovations: {
-                        create: innovation.map((innovation) => ({
-                            innovation: { connect: { id: innovation.id } }, // connexion unique pour chaque innovation sélectionné
-                        })),
-                    },
                 },
+                etiquettesInnovation: innovation
+                    ? {
+                          create: [
+                              {
+                                  innovation: {
+                                      connect: { id: parseInt(innovation) },
+                                  },
+                              },
+                          ],
+                      }
+                    : undefined,
             },
             include: {
-                creators: true, // inclure les créateurs
+                creators: true,
                 etiquettesTags: {
                     include: { tag: true },
                 },
-                etiquettesInnovations: {
+                etiquettesInnovation: {
                     include: { innovation: true },
                 },
             },
         });
-        return res.status(201).send({
-            ...newEtiquette,
-            tags: newEtiquette.etiquettesTags.map(
-                (etiquetteTag) => etiquetteTag.tag
-            ),
-        });
+
+        return res.status(201).json(newEtiquette);
     } catch (error) {
-        console.error("Erreur lors de la création de l'étiquette :", error);
-        return res
-            .status(500)
-            .send("Erreur lors de la création de l'étiquette");
+        console.error("Erreur lors de la création de l'étiquette:", error);
+        return res.status(500).json({
+            error: "Erreur lors de la création de l'étiquette",
+            details: error.message,
+        });
     }
 }
 
