@@ -59,7 +59,7 @@
                         <input
                             type="text"
                             id="title"
-                            name="title"
+                            name="titleProject"
                             placeholder="Titre du projet"
                             required
                         />
@@ -98,8 +98,8 @@
                         <h3>Choix de l'innovation</h3>
                         <select id="innovation" name="innovation"></select>
                     </div>
+                    <button type="submit" id="submit-btn">Ajouter</button>
                 </form>
-                <button type="submit" id="submit-btn">Ajouter</button>
             </div>
         </div>
 
@@ -159,6 +159,7 @@
                         placeholder="Description"
                         required
                     ></textarea>
+
                     <button type="submit" id="submit-btn">Ajouter</button>
                 </form>
             </div>
@@ -189,5 +190,22 @@
         <script src="/js/adminScript/Tag/EditDeleteTags.js"></script>
 
         <script src="/js/adminScript/Other/image-preview.js"></script>
+        <script>
+            document
+                .getElementById("background")
+                .addEventListener("change", function (event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const preview =
+                                document.getElementById("image-preview");
+                            preview.src = e.target.result;
+                            preview.style.display = "block";
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+        </script>
     </body>
 </html>
