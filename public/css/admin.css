@@ -218,7 +218,7 @@ body {
 .popup-etiquette form .main-content,
 .popup-creator form .main-content,
 .popup-tag form .main-content {
-  width: 700px;
+  width: 100%;
 }
 .popup-etiquette form label,
 .popup-creator form label,
@@ -245,13 +245,13 @@ body {
 
 .popup-etiquette form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .popup-etiquette .select-content {
   display: flex;
   flex-direction: column;
   margin-left: 24px;
-  width: 740px;
+  width: 100%;
 }
 
 .popup-delete {

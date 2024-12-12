@@ -66,42 +66,60 @@ export async function getEtiquetteById(req, res) {
 export async function createEtiquette(req, res) {
     try {
         const {
+            slug,
+            image,
             titleProject,
             description,
+            logo,
+            background,
             titleContainer1,
             descriptionContainer1,
             titleContainer2,
             descriptionContainer2,
+            imageContainer2,
             titleContainer3,
             descriptionContainer3,
+            imageContainer3,
+            bannerImage,
+            quoteBanner,
             titleContainer4,
             descriptionContainer4,
+            imageContainer4,
             creatorId,
             creators = [],
             tags = [],
-            innovation, // une seule valeur, pas un tableau
+            innovation = [],
         } = req.body;
 
-        // Récupérer le chemin du fichier téléchargé
-        const background = req.file ? req.file.path : null;
-
-        // Générer le slug à partir du titre
-        const slug = titleProject.toLowerCase().replace(/\s+/g, "-");
+        image = req.file.path ? req.file.path : image;
+        background = req.file.path ? req.file.path : background;
+        imageContainer2 = req.file.path ? req.file.path : imageContainer2;
+        imageContainer3 = req.file.path ? req.file.path : imageContainer3;
+        bannerImage = req.file.path ? req.file.path : bannerImage;
+        quoteBanner = req.file.path ? req.file.path : quoteBanner;
+        imageContainer4 = req.file.path ? req.file.path : imageContainer4;
 
         const newEtiquette = await prisma.etiquette.create({
             data: {
                 slug,
+                image,
                 titleProject,
-                descriptionProject: description,
-                background, // Stocker le chemin de l'image
+                description,
+                logo,
+                background,
                 titleContainer1,
                 descriptionContainer1,
                 titleContainer2,
                 descriptionContainer2,
+                imageContainer2,
                 titleContainer3,
                 descriptionContainer3,
+                imageContainer3,
+                bannerImage,
+                quoteBanner,
                 titleContainer4,
                 descriptionContainer4,
+                imageContainer4,
                 creatorId: parseInt(creatorId),
                 creators: {
                     connect: creators.map((creator) => ({
