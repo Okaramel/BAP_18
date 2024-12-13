@@ -8,10 +8,15 @@ Projet en équipe avec un client IFT (Institute for Future Technologies) qui a p
 
 ## Fonctionnalités
 <br />
-- [x] UX/UI attractif
+- UX/UI attractif
 <br/>
-- [x] Création de base de données
+- Création de base de données
 <br/>
-- [x] Etiquette claires
+- Etiquette claires
 <br/>
-- [ ] Responsive (SOON
+- Responsive (SOON
+
+## Outils utilisés
+- EJS
+- Javascript
+- Sass
