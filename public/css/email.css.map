@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/email.scss","../scss/_variables.scss"],"names":[],"mappings":"AAGA,QACI,eACA,qBACA,uBAEA,cACI,aACA,wBACA,SAEA,gBACI,mBACA,eACA,YACA,oBAGJ,qBACI,iBCdD,cDeC,MClBJ,cDmBI,gBAEA,2BACI","file":"email.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/email.scss","../scss/_variables.scss"],"names":[],"mappings":"AAGA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAGJ;EACI,kBCdD;EDeC,OClBJ;EDmBI;;AAEA;EACI;;;AAMhB;EACI;IACI;IACA;IACA;;EAEA;IACI;IACA","file":"email.css"}
