@@ -46,7 +46,7 @@ router.get("/page/:id", async (req, res) => {
     }
 });
 
-router.get("/", verifyToken, getEtiquettes);
+router.get("/", getEtiquettes);
 
 router.post(
     "/",
