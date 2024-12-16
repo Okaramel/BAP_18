@@ -27,7 +27,15 @@
                 cursor: pointer;
             }
         }
+
+        input {
+            color: black;
+        }
     }
+}
+
+input[type=number]::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 @media (max-width: 768px) {
