@@ -59,7 +59,6 @@ a:visited {
     position: relative;
     color: white;
     margin-top: 64px;
-    background: url("../img/background.jpeg") no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -125,6 +124,7 @@ a:visited {
                 img {
                     width: 34px;
                     height: 34px;
+                    border-radius: 50%;
                 }
                 h1 {
                     margin-top: 16px;
@@ -160,6 +160,7 @@ a:visited {
 
     .second-container {
         display: flex;
+        justify-content: space-between;
         margin-top: 64px;
 
         .content {
@@ -189,6 +190,7 @@ a:visited {
         display: flex;
         flex-direction: row-reverse;
         margin-top: 64px;
+        justify-content: space-between;
 
         .content {
             display: flex;
@@ -215,7 +217,6 @@ a:visited {
 
     .quote-container {
         position: relative;
-        background: url("../img/background-quote.png") no-repeat center center;
         background-size: cover;
         margin: 64px 100px 0 100px;
         &::before {

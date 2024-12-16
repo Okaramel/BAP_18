@@ -2,7 +2,7 @@ import jsonwebtoken from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(" ")[1]; // Extraire le token
+    const token = authHeader && authHeader.split(" ")[1]; // extraire le token
 
     if (!token) {
         return res.status(403).send("A token is required for authentication");

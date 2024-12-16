@@ -58,13 +58,17 @@ export async function getCreatorById(req, res) {
 // fonction pour créer un nouveau créateur
 export async function createCreator(req, res) {
     try {
-        const body = req.body;
+        const { name, email, linkedin } = req.body;
+        const profilePicture = req.file
+            ? req.file.path.replace("public/", "")
+            : null;
+
         const newCreator = await prisma.creator.create({
             data: {
-                name: body.name,
-                email: body.email,
-                linkedin: body.linkedin,
-                image: body.image,
+                name,
+                email,
+                linkedin,
+                image: profilePicture,
             },
         });
         return res.status(201).send(newCreator);
@@ -95,21 +99,23 @@ export async function deleteCreator(req, res) {
 // fonction pour mettre à jour un créateur
 export async function updateCreator(req, res) {
     try {
-        const id = req.params.id;
-        const body = req.body;
+        const id = parseInt(req.params.id);
+        const { name, email, linkedin } = req.body;
+        const profilePicture = req.file
+            ? req.file.path.replace("public/", "")
+            : null;
 
         const updatedCreator = await prisma.creator.update({
-            where: {
-                id: parseInt(id),
-            },
+            where: { id },
             data: {
-                name: body.name,
-                email: body.email,
-                linkedin: body.linkedin,
-                image: body.image,
+                name,
+                email,
+                linkedin,
+                ...(profilePicture && { image: profilePicture }),
             },
         });
-        return res.status(200).send(updatedCreator);
+
+        return res.status(200).json(updatedCreator);
     } catch (error) {
         console.error("Erreur lors de la mise à jour du créateur:", error);
         return res

@@ -1,19 +1,27 @@
 import express from "express";
 import {
+    createCreator,
     getCreators,
     getCreatorById,
-    createCreator,
-    deleteCreator,
     updateCreator,
+    deleteCreator,
 } from "../controllers/CreatorController.js";
+import upload from "../middleware/Multer.js";
 import { verifyToken } from "../middleware/TokenMiddleware.js";
 
 const router = express.Router();
 
+// Route pour créer un créateur avec téléchargement de fichier
+router.post("/", verifyToken, upload.single("profile_picture"), createCreator);
+
 router.get("/", verifyToken, getCreators);
 router.get("/:id", verifyToken, getCreatorById);
-router.post("/", verifyToken, createCreator);
+router.put(
+    "/:id",
+    verifyToken,
+    upload.single("profile_picture"),
+    updateCreator
+);
 router.delete("/:id", verifyToken, deleteCreator);
-router.put("/:id", verifyToken, updateCreator);
 
 export default router;

@@ -33,7 +33,7 @@ router.get("/code", (req, res) => {
     res.render("code", { title: "Code" });
 });
 
-router.get("/etiquette/:id", (req, res) => {
+router.get("/etiquettes", (req, res) => {
     res.render("etiquettePage/etiquettePage", { title: "Project" });
 });
 

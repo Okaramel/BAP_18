@@ -5,20 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.querySelector(".overlay-tag");
     const popupTitle = document.querySelector(".popup-tag #popup-title");
 
-    // Ouvrir le formulaire d'ajout
+    // ouvre le formulaire d'ajout
     addBtn.addEventListener("click", () => {
         overlay.style.display = "flex";
         popupTitle.innerHTML = "Ajouter un tag";
-        addForm.reset(); // Réinitialiser le formulaire
+        addForm.reset(); // réinitialise le formulaire
         addForm.setAttribute("data-action", "create");
     });
 
-    // Soumettre le formulaire pour ajouter un créateur
+    // soumettre le formulaire pour ajouter un créateur
     addForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(addForm);
 
-        // Création de l'objet data à envoyer à l'API
+        // création de l'objet data à envoyer à l'API
         const data = {
             slug: formData.get("name").toLowerCase().replace(/\s+/g, "-"),
             name: formData.get("name"),
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (addForm.getAttribute("data-action") === "create") {
             try {
-                // Envoyer la requête pour créer le créateur
+                // envoyer la requête pour créer le créateur
                 const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const newTag = await response.json();
                 if (response.ok) {
-                    location.reload(); // Rafraîchir la page pour afficher le nouveau créateur
-                    overlay.style.display = "none"; // Fermer le formulaire
+                    location.reload(); // rafraîchie la page pour afficher le nouveau créateur
+                    overlay.style.display = "none"; // fermer le formulaire
                 } else {
                     console.error(
                         "Erreur lors de la création du créateur:",
@@ -60,10 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Afficher le formulaire d'ajout de créateur
+    // affiche le formulaire d'ajout de créateur
     document.querySelector(".add-btn").addEventListener("click", () => {});
 
-    // Masquer le formulaire d'ajout de créateur
+    // masque le formulaire d'ajout de créateur
     document
         .querySelector(".overlay-tag")
         .addEventListener("click", (event) => {

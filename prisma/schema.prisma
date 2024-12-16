@@ -28,34 +28,33 @@ enum MailType {
 model Etiquette {
   id              Int            @id @default(autoincrement())
   slug            String         @unique
-  logo           String?  //// IMAGE
-  background     String  //// IMAGE
-  titleProject          String         @unique
-  descriptionProject     String?
+  logo            String?
+  background      String
+  titleProject    String         @unique
+  descriptionProject String?
 
-  titleContainer1        String
-  descriptionContainer1  String
+  titleContainer1 String
+  descriptionContainer1 String
 
-  titleContainer2        String?
-  descriptionContainer2  String?
-  imageContainer2        String? //// IMAGE
+  titleContainer2 String?
+  descriptionContainer2 String?
+  imageContainer2 String?
 
-  titleContainer3        String?
-  descriptionContainer3  String?
-  imageContainer3        String? //// IMAGE
+  titleContainer3 String?
+  descriptionContainer3 String?
+  imageContainer3 String?
 
-  bannerImage           String? //// IMAGE
-  quoteBanner           String?
+  titleContainer4 String?
+  descriptionContainer4 String?
+  imageContainer4 String?
 
-  titleContainer4           String?
-  descriptionContainer4     String?
-  imageContainer4           String? //// IMAGE
+  bannerImage     String?
+  quoteBanner     String?
 
   creatorId       Int
-  creators Creator[] @relation("EtiquetteCreators") 
-  etiquettesTags  EtiquetteTag[] 
+  creators        Creator[]      @relation("EtiquetteCreators")
+  etiquettesTags  EtiquetteTag[]
   etiquettesInnovation EtiquetteInnovation[]
-
 }
 
 model Creator {
@@ -64,39 +63,39 @@ model Creator {
   email           String         @unique
   linkedin        String?
   image           String?
-  etiquettes Etiquette[] @relation("EtiquetteCreators")
+  etiquettes      Etiquette[]    @relation("EtiquetteCreators")
 }
 
 model Tag {
-  id             Int            @id @default(autoincrement())
-  slug           String         @unique
-  name           String         @unique
-  description    String?
-  etiquettesTags EtiquetteTag[] 
+  id              Int            @id @default(autoincrement())
+  slug            String         @unique
+  name            String         @unique
+  description     String?
+  etiquettesTags  EtiquetteTag[]
 }
 
 model EtiquetteTag {
-  etiquetteId  Int
-  tagId        Int
-  etiquette    Etiquette @relation(fields: [etiquetteId], references: [id])
-  tag          Tag       @relation(fields: [tagId], references: [id])
+  etiquetteId     Int
+  tagId           Int
+  etiquette       Etiquette      @relation(fields: [etiquetteId], references: [id])
+  tag             Tag            @relation(fields: [tagId], references: [id])
 
-  @@id([etiquetteId, tagId]) 
+  @@id([etiquetteId, tagId])
 }
 
 model Innovation {
-  id             Int            @id @default(autoincrement())
-  name           String         @unique
-  description    String
-  image         String //// IMAGE
-  etiquettesCategories EtiquetteInnovation[]
+  id              Int            @id @default(autoincrement())
+  name            String         @unique
+  description     String
+  image           String
+  etiquettesInnovation EtiquetteInnovation[]
 }
 
 model EtiquetteInnovation {
-  etiquetteId  Int
-  categoryId   Int
-  etiquette    Etiquette @relation(fields: [etiquetteId], references: [id])
-  innovation     Innovation  @relation(fields: [categoryId], references: [id])
+  etiquetteId     Int
+  categoryId      Int
+  etiquette       Etiquette      @relation(fields: [etiquetteId], references: [id])
+  innovation      Innovation     @relation(fields: [categoryId], references: [id])
 
   @@id([etiquetteId, categoryId])
 }
