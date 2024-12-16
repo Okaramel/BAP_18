@@ -29,7 +29,13 @@
                         </p>
                         <div class="tag">
                             <ul>
-                                <% etiquette.etiquettesTags.forEach(tag => { %>
+                                <%
+                                etiquette.etiquettesInnovation.forEach(function(innovation)
+                                { %>
+                                <li><%= innovation.innovation.name %></li>
+                                <% }); %> <%
+                                etiquette.etiquettesTags.forEach(function(tag) {
+                                %>
                                 <li><%= tag.tag.name %></li>
                                 <% }); %>
                             </ul>
