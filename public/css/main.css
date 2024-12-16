@@ -45,7 +45,7 @@
 .menu_bouton {
   display: flex;
   justify-content: baseline;
-  gap: 8rem;
+  gap: 7rem;
 }
 
 .menu_burger {
