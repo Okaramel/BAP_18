@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "types": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "npm-run-all --parallel watch-node watch-main",
@@ -29,6 +30,7 @@
         "nodemailer": "^6.9.16",
         "npm": "^10.9.0",
         "path": "^0.12.7",
+        "resend": "^4.0.1",
         "uuid": "^11.0.3"
     }
 }
