@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <link rel="stylesheet" href="/css/etiquettePage.css" />
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+
+        <main>
+            <section class="top-banner">
+                <div class="banner-container" style='background: url("/<%= etiquette.background %>") no-repeat center center'>
+                    <div class="title">
+                        <img src="/<%= etiquette.logo %>" alt="logo-etiquette" />
+                        <h1><%= etiquette.titleProject %></h1>
+                    </div>
+                    <div class="middle">
+                        <p class="description"><%= etiquette.descriptionProject %></p>
+                        <div class="tag">
+                            <ul>
+                                <% etiquette.etiquettesTags.forEach(tag => { %>
+                                <li><%= tag.tag.name %></li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="creator">
+                        <ul>
+                            <% if (etiquette.creators && etiquette.creators.length > 0) { %> <% etiquette.creators.forEach(creator => { %>
+                            <li>
+                                <h1><%= creator.name %></h1>
+                                <% if (creator.image) { %>
+                                <img src="/<%= creator.image %>" alt="<%= creator.name %>" />
+                                <% } %>
+                            </li>
+                            <% }); %> <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="main-container">
+                <% if (etiquette.titleContainer1 && etiquette.descriptionContainer1) { %>
+                <div class="first-container">
+                    <h1><%= etiquette.titleContainer1 %></h1>
+                    <p><%= etiquette.descriptionContainer1 %></p>
+                </div>
+                <hr />
+                <% } %> <% if (etiquette.titleContainer2 && etiquette.descriptionContainer2) { %>
+                <div class="second-container">
+                    <div class="content">
+                        <h1><%= etiquette.titleContainer2 %></h1>
+                        <p><%= etiquette.descriptionContainer2 %></p>
+                    </div>
+                    <% if (etiquette.imageContainer2) { %>
+                    <img src="/<%= etiquette.imageContainer2 %>" alt="Container 2" />
+                    <% } %>
+                </div>
+                <% } %> <% if (etiquette.titleContainer3 && etiquette.descriptionContainer3) { %>
+                <div class="third-container">
+                    <div class="content">
+                        <h1><%= etiquette.titleContainer3 %></h1>
+                        <p><%= etiquette.descriptionContainer3 %></p>
+                    </div>
+                    <% if (etiquette.imageContainer3) { %>
+                    <img src="/<%= etiquette.imageContainer3 %>" alt="Container 3" />
+                    <% } %>
+                </div>
+                <% } %> <% if (etiquette.quoteBanner) { %>
+                <div class="quote-container">
+                    <p><%= etiquette.quoteBanner %></p>
+                    <% if (etiquette.bannerImage) { %>
+                    <style>
+                        .quote-container {
+                            background-image: url("/<%= etiquette.bannerImage %>");
+                        }
+                    </style>
+                    <% } %>
+                </div>
+                <% } %> <% if (etiquette.titleContainer4 && etiquette.descriptionContainer4) { %>
+                <div class="fourth-container">
+                    <h1><%= etiquette.titleContainer4 %></h1>
+                    <p><%= etiquette.descriptionContainer4 %></p>
+                    <% if (etiquette.imageContainer4) { %>
+                    <img src="/<%= etiquette.imageContainer4 %>" alt="Container 4" />
+                    <% } %>
+                </div>
+                <% } %>
+            </section>
+
+            <%- include('./partials/footer.ejs') %>
+
+        </main>
+    </body>
+</html>
