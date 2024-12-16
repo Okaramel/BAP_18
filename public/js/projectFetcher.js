@@ -28,9 +28,9 @@ function fetchAll() {
             data.forEach((project) => {
                 let newProject = document.createElement("article");                                 // create new block
                 newProject.innerHTML = `
-                <a href="#" class="article_img"><img src="${project.background}" alt="" /></a>
+                <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
                         <div class="article_text">
-                            <a href="#" class="article_title"><h4>${project.titleProject}</h4></a>
+                            <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
                             <p class="article_description">${project.descriptionProject}</p>
                         </div>
                 `;                                                                                  // fill block
