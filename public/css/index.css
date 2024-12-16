@@ -1,3 +1,9 @@
+.header {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/index_header.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .header_text {
   color: hsl(0, 0%, 65%);
 }
@@ -20,6 +26,7 @@
   font-size: 1rem;
   border: none;
   border-radius: 0.5rem;
+  color: black;
 }
 .header_search button {
   height: 100%;

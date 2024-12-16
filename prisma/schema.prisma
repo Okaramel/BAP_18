@@ -31,21 +31,21 @@ model Etiquette {
   logo            String?
   background      String
   titleProject    String         @unique
-  descriptionProject String?
+  descriptionProject String? @db.Text
 
   titleContainer1 String
-  descriptionContainer1 String
+  descriptionContainer1 String @db.Text
 
   titleContainer2 String?
-  descriptionContainer2 String?
+  descriptionContainer2 String? @db.Text
   imageContainer2 String?
 
   titleContainer3 String?
-  descriptionContainer3 String?
+  descriptionContainer3 String? @db.Text
   imageContainer3 String?
 
   titleContainer4 String?
-  descriptionContainer4 String?
+  descriptionContainer4 String? @db.Text
   imageContainer4 String?
 
   bannerImage     String?

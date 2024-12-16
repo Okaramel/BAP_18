@@ -29,7 +29,9 @@ export async function getEtiquettes(req, res) {
         );
     } catch (error) {
         console.error("Erreur lors de la récupération des étiquettes:", error);
-        return res.status(500).send("Erreur lors de la récupération des étiquettes");
+        return res
+            .status(500)
+            .send("Erreur lors de la récupération des étiquettes");
     }
 }
 
@@ -79,15 +81,23 @@ export async function getEtiquetteById(req, res) {
 // fonction pour créer une nouvelle étiquette
 export async function createEtiquette(req, res) {
     try {
-        const { titleProject, descriptionProject, titleContainer1, descriptionContainer1, titleContainer2, descriptionContainer2, titleContainer3, descriptionContainer3, quoteBanner, titleContainer4, descriptionContainer4, creator, creators = [], tags = [], innovation } = req.body;
-
-        // vérifie que les champs obligatoires sont définis
-        if (!titleProject || !titleContainer1 || !descriptionContainer1 || !creator) {
-            return res.status(400).json({
-                error: "Champs obligatoires manquants",
-                details: "titleProject, titleContainer1, descriptionContainer1 et creator sont requis",
-            });
-        }
+        const {
+            titleProject,
+            descriptionProject,
+            titleContainer1,
+            descriptionContainer1,
+            titleContainer2,
+            descriptionContainer2,
+            titleContainer3,
+            descriptionContainer3,
+            quoteBanner,
+            titleContainer4,
+            descriptionContainer4,
+            creator,
+            creators = [],
+            tags = [],
+            innovation,
+        } = req.body;
 
         // génére un slug unique à partir de titleProject
         let slug = titleProject.toLowerCase().replace(/\s+/g, "-");
@@ -96,7 +106,9 @@ export async function createEtiquette(req, res) {
         });
         let suffix = 1;
         while (existingEtiquette) {
-            slug = `${titleProject.toLowerCase().replace(/\s+/g, "-")}-${suffix}`;
+            slug = `${titleProject
+                .toLowerCase()
+                .replace(/\s+/g, "-")}-${suffix}`;
             existingEtiquette = await prisma.etiquette.findUnique({
                 where: { slug },
             });
@@ -105,12 +117,36 @@ export async function createEtiquette(req, res) {
 
         // récupére les chemins des fichiers téléchargés avec vérification
         // clean up paths and replace all anti slash with slash
-        const logo = req.files?.logo ? req.files.logo[0].path.replace("public\\", "").replaceAll("\\", "/") : null;
-        const background = req.files?.background ? req.files.background[0].path.replace("public\\", "").replaceAll("\\", "/") : null;
-        const imageContainer2 = req.files?.imageContainer2 ? req.files.imageContainer2[0].path.replace("public\\", "").replaceAll("\\", "/") : null;
-        const imageContainer3 = req.files?.imageContainer3 ? req.files.imageContainer3[0].path.replace("public\\", "").replaceAll("\\", "/") : null;
-        const bannerImage = req.files?.bannerImage ? req.files.bannerImage[0].path.replace("public\\", "").replaceAll("\\", "/") : null;
-        const imageContainer4 = req.files?.imageContainer4 ? req.files.imageContainer4[0].path.replace("public\\", "").replaceAll("\\", "/") : null;
+        const logo = req.files?.logo
+            ? req.files.logo[0].path
+                  .replace(/public[\\/]/, "")
+                  .replaceAll("\\", "/")
+            : null;
+        const background = req.files?.background
+            ? req.files.background[0].path
+                  .replace(/public[\\/]/, "")
+                  .replaceAll("\\", "/")
+            : null;
+        const imageContainer2 = req.files?.imageContainer2
+            ? req.files.imageContainer2[0].path
+                  .replace(/public[\\/]/, "")
+                  .replaceAll("\\", "/")
+            : null;
+        const imageContainer3 = req.files?.imageContainer3
+            ? req.files.imageContainer3[0].path
+                  .replace(/public[\\/]/, "")
+                  .replaceAll("\\", "/")
+            : null;
+        const bannerImage = req.files?.bannerImage
+            ? req.files.bannerImage[0].path
+                  .replace(/public[\\/]/, "")
+                  .replaceAll("\\", "/")
+            : null;
+        const imageContainer4 = req.files?.imageContainer4
+            ? req.files.imageContainer4[0].path
+                  .replace(/public[\\/]/, "")
+                  .replaceAll("\\", "/")
+            : null;
 
         const newEtiquette = await prisma.etiquette.create({
             data: {
@@ -211,22 +247,50 @@ export async function deleteEtiquette(req, res) {
         return res.status(200).send(deletedEtiquette);
     } catch (error) {
         console.error("Erreur lors de la suppression de l'étiquette:", error);
-        return res.status(500).send("Erreur lors de la suppression de l'étiquette");
+        return res
+            .status(500)
+            .send("Erreur lors de la suppression de l'étiquette");
     }
 }
 // fonction pour mettre à jour une étiquette
 export async function updateEtiquette(req, res) {
     try {
         const id = parseInt(req.params.id);
-        const { titleProject, description, titleContainer1, descriptionContainer1, titleContainer2, descriptionContainer2, titleContainer3, descriptionContainer3, quoteBanner, titleContainer4, descriptionContainer4, creator, creators = [], tags = [], innovation } = req.body;
+        const {
+            titleProject,
+            description,
+            titleContainer1,
+            descriptionContainer1,
+            titleContainer2,
+            descriptionContainer2,
+            titleContainer3,
+            descriptionContainer3,
+            quoteBanner,
+            titleContainer4,
+            descriptionContainer4,
+            creator,
+            creators = [],
+            tags = [],
+            innovation,
+        } = req.body;
 
         // Récupérer les chemins des fichiers téléchargés s'ils existent
         const logo = req.files?.logo ? req.files.logo[0].path : undefined;
-        const background = req.files?.background ? req.files.background[0].path : undefined;
-        const imageContainer2 = req.files?.imageContainer2 ? req.files.imageContainer2[0].path : undefined;
-        const imageContainer3 = req.files?.imageContainer3 ? req.files.imageContainer3[0].path : undefined;
-        const bannerImage = req.files?.bannerImage ? req.files.bannerImage[0].path : undefined;
-        const imageContainer4 = req.files?.imageContainer4 ? req.files.imageContainer4[0].path : undefined;
+        const background = req.files?.background
+            ? req.files.background[0].path
+            : undefined;
+        const imageContainer2 = req.files?.imageContainer2
+            ? req.files.imageContainer2[0].path
+            : undefined;
+        const imageContainer3 = req.files?.imageContainer3
+            ? req.files.imageContainer3[0].path
+            : undefined;
+        const bannerImage = req.files?.bannerImage
+            ? req.files.bannerImage[0].path
+            : undefined;
+        const imageContainer4 = req.files?.imageContainer4
+            ? req.files.imageContainer4[0].path
+            : undefined;
 
         const updatedEtiquette = await prisma.etiquette.update({
             where: {

@@ -1,5 +1,11 @@
 import express from "express";
-import { getEtiquettes, createEtiquette, deleteEtiquette, updateEtiquette, getEtiquetteById } from "../controllers/EtiquetteController.js";
+import {
+    getEtiquettes,
+    createEtiquette,
+    deleteEtiquette,
+    updateEtiquette,
+    getEtiquetteById,
+} from "../controllers/EtiquetteController.js";
 import { verifyToken } from "../middleware/TokenMiddleware.js";
 import upload from "../middleware/Multer.js";
 import prisma from "../config/prisma.js";
@@ -39,7 +45,10 @@ router.get("/page/:id", async (req, res) => {
         // if (etiquette.bannerImage) etiquette.bannerImage = etiquette.bannerImage.replaceAll("\\", "/");
         // if (etiquette.imageContainer4) etiquette.imageContainer4 = etiquette.imageContainer4.replaceAll("\\", "/");
 
-        res.render("etiquettePage", { etiquette, "title": etiquette.titleProject });
+        res.render("etiquettePage", {
+            etiquette,
+            title: etiquette.titleProject,
+        });
     } catch (error) {
         console.error("Erreur lors de la récupération de l'étiquette:", error);
         res.status(500).send("Erreur lors de la récupération de l'étiquette");
