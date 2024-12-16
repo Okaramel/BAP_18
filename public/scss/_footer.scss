@@ -28,7 +28,17 @@
 
     & .socials {
         display: flex;
+        justify-content: center;
         flex-flow: row nowrap;
         gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-flow: column nowrap; /* Passer en colonne */
+        align-items: center; /* Centrer les éléments dans la colonne */
+        text-align: center; /* Centrer le texte si nécessaire */
+        gap: 2rem; 
     }
 }

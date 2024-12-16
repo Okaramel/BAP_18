@@ -60,11 +60,13 @@
         width: 100%;
         display: grid;
         // flex: row;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 
     &_article {
         & .article {
+            gap: 10px;
+            padding: 10px;
             &_img {
                 height: fit-content;
                 width: fit-content;
@@ -94,7 +96,12 @@
         }
     }
 
+
     & h4 {
         margin: 0;
     }
+}
+
+@media (max-width: 768px) {
+
 }

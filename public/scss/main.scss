@@ -5,6 +5,7 @@
 @use "navbar";
 @use "header";
 @use "footer";
+@use "header";
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
@@ -67,23 +68,4 @@ a:visited {
     &:hover {
         text-decoration: underline;
     }
-}
-
-// Header common properties
-
-.header {
-    height: 100dvh;
-    padding: 13.5rem 8rem 6rem 8rem;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 1.5rem;
-
-    & > * {
-        margin: 0;
-        color: variables.$white;
-    }
-}
-
-i {
-    padding: 0;
 }
