@@ -27,7 +27,9 @@ Projet en équipe avec un client IFT (Institute for Future Technologies) qui a p
 
 ## Ouvrir le site
 
+-   Ecrire npm i pour installer les modules
 -   Modifier le DATABASE_URL dans le .env
+-   Créer une nouvelle migration npx prisma migrate dev --name add_profile
 -   Faire npx prisma generate
 -   Ecrire dans la console VS CODE "npm run create-innovations" pour créer les innovations
 
