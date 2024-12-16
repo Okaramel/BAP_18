@@ -159,6 +159,8 @@ body {
     position: relative;
     z-index: 1001;
     width: 370px;
+    overflow: scroll;
+    max-height: 795px;
 
     .close-btn {
         position: absolute;
@@ -204,8 +206,8 @@ body {
         input,
         textarea,
         select {
-            margin-bottom: 15px;
-            padding: 10px;
+            margin-bottom: 12px;
+            padding: 8px;
             border: 1px solid #dbdbdb;
             border-radius: 4px;
             font-size: 12px;

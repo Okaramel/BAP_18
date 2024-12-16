@@ -56,24 +56,20 @@
                 <form id="etiquette-form" enctype="multipart/form-data">
                     <div style="display: flex">
                         <div class="main-content">
-                            <h3>Titre du projet</h3>
+                            <h3>Titre du projet*</h3>
                             <input
                                 type="text"
-                                id="title"
+                                id="titleProject"
                                 name="titleProject"
                                 placeholder="Titre du projet"
                                 required
                             />
                             <h3>Logo</h3>
-                            <input
-                                type="file"
-                                name="background"
-                                id="background"
-                            />
+                            <input type="file" name="logo" id="logo" />
                             <img
-                                id="image-preview"
+                                id="logo-preview"
                                 src="#"
-                                alt="Prévisualisation de l'image"
+                                alt="Prévisualisation du logo"
                                 style="
                                     display: none;
                                     max-width: 100%;
@@ -81,16 +77,111 @@
                                     margin-bottom: 10px;
                                 "
                             />
+
+                            <h3>Background*</h3>
+                            <input
+                                type="file"
+                                name="background"
+                                id="background"
+                                required
+                            />
+                            <img
+                                id="background-preview"
+                                src="#"
+                                alt="Prévisualisation du background"
+                                style="
+                                    display: none;
+                                    max-width: 100%;
+                                    height: auto;
+                                    margin-bottom: 10px;
+                                "
+                            />
+
                             <h3>Description</h3>
                             <textarea
                                 id="description"
-                                name="description"
+                                name="descriptionProject"
                                 placeholder="Description"
+                            ></textarea>
+                            <h3>Titre container 1*</h3>
+                            <input
+                                type="text"
+                                id="title1"
+                                name="titleContainer1"
+                                placeholder="Titre container 1"
+                                required
+                            />
+                            <h3>Description container 1*</h3>
+                            <textarea
+                                id="description1"
+                                name="descriptionContainer1"
+                                placeholder="Description container 1"
                                 required
                             ></textarea>
+                            <h3>Titre container 3</h3>
+                            <input
+                                type="text"
+                                id="title3"
+                                name="titleContainer3"
+                                placeholder="Titre container 3"
+                            />
+                            <h3>Description container 3</h3>
+                            <textarea
+                                id="description3"
+                                name="descriptionContainer3"
+                                placeholder="Description container 3"
+                            ></textarea>
+                            <h3>Image container 3</h3>
+                            <input
+                                type="file"
+                                name="imageContainer3"
+                                id="imageContainer3"
+                            />
+                            <img
+                                id="imageContainer3-preview"
+                                src="#"
+                                alt="Prévisualisation de l'image container 3"
+                                style="
+                                    display: none;
+                                    max-width: 100%;
+                                    height: auto;
+                                    margin-bottom: 10px;
+                                "
+                            />
+
+                            <h3>Titre container 4</h3>
+                            <input
+                                type="text"
+                                id="title4"
+                                name="titleContainer4"
+                                placeholder="Titre container 4"
+                            />
+                            <h3>Description container 4</h3>
+                            <textarea
+                                id="description4"
+                                name="descriptionContainer4"
+                                placeholder="Description container 4"
+                            ></textarea>
+                            <h3>Image container 4</h3>
+                            <input
+                                type="file"
+                                name="imageContainer4"
+                                id="imageContainer4"
+                            />
+                            <img
+                                id="imageContainer4-preview"
+                                src="#"
+                                alt="Prévisualisation de l'image container 4"
+                                style="
+                                    display: none;
+                                    max-width: 100%;
+                                    height: auto;
+                                    margin-bottom: 10px;
+                                "
+                            />
                         </div>
                         <div class="select-content">
-                            <h3>Choix des créateurs</h3>
+                            <h3>Choix des créateurs*</h3>
                             <select id="creator_form" name="creator"></select>
                             <select id="creator_form2" name="creator2"></select>
                             <select id="creator_form3" name="creator3"></select>
@@ -100,8 +191,65 @@
                             <select id="tag2" name="tag2"></select>
                             <select id="tag3" name="tag3"></select>
 
-                            <h3>Choix de l'innovation</h3>
+                            <h3>Choix de l'innovation*</h3>
                             <select id="innovation" name="innovation"></select>
+
+                            <h3>Titre container 2</h3>
+                            <input
+                                type="text"
+                                id="title2"
+                                name="titleContainer2"
+                                placeholder="Titre container 2"
+                            />
+                            <h3>Description container 2</h3>
+                            <textarea
+                                id="description2"
+                                name="descriptionContainer2"
+                                placeholder="Description container 2"
+                            ></textarea>
+                            <h3>Image container 2</h3>
+                            <input
+                                type="file"
+                                name="imageContainer2"
+                                id="imageContainer2"
+                            />
+                            <img
+                                id="imageContainer2-preview"
+                                src="#"
+                                alt="Prévisualisation de l'image container 2"
+                                style="
+                                    display: none;
+                                    max-width: 100%;
+                                    height: auto;
+                                    margin-bottom: 10px;
+                                "
+                            />
+
+                            <h3>Quote</h3>
+                            <input
+                                type="text"
+                                id="quoteBanner"
+                                name="quoteBanner"
+                                placeholder="Quote"
+                            />
+
+                            <h3>Image quote</h3>
+                            <input
+                                type="file"
+                                name="bannerImage"
+                                id="bannerImage"
+                            />
+                            <img
+                                id="bannerImage-preview"
+                                src="#"
+                                alt="Prévisualisation de l'image quote"
+                                style="
+                                    display: none;
+                                    max-width: 100%;
+                                    height: auto;
+                                    margin-bottom: 10px;
+                                "
+                            />
                         </div>
                     </div>
 
@@ -137,10 +285,15 @@
                         placeholder="Lien LinkedIn"
                     />
                     <input
-                        type="text"
-                        id="image"
-                        name="image"
+                        type="file"
+                        id="profile_picture"
+                        name="profile_picture"
                         placeholder="Image URL"
+                    />
+                    <img
+                        id="profile_picture_preview"
+                        src=""
+                        alt="Aperçu de l'image"
                     />
                     <button type="submit" id="submit-btn">Ajouter</button>
                 </form>

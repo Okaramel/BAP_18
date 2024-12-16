@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cancelDeleteBtn = document.querySelector(".popup-delete .no");
     let tagIdToDelete = null;
 
-    // Fonction pour récupérer tous les tags
+    // fonction pour récupérer tous les tags
     async function getTags() {
         try {
             const response = await fetch(apiUrl, {
@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Fonction pour afficher les tags dans le DOM
+    // fonction pour afficher les tags dans le DOM
     function displayTags(tags) {
         const container = document.querySelector(".tag-card");
-        container.innerHTML = ""; // Clear existing content
+        container.innerHTML = "";
         tags.forEach((tag) => {
             const item = document.createElement("div");
             item.classList.add("tag-item");
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             container.appendChild(item);
         });
 
-        // Ajouter des écouteurs d'événements pour les boutons de modification et de suppression
+        // ajoute des écouteurs d'événements pour les boutons de modification et de suppression
         document.querySelectorAll(".tag-item .edit-btn").forEach((button) => {
             button.addEventListener("click", (event) => {
                 const id = event.target.getAttribute("data-id");
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Fonction pour récupérer un tag pour la modification
+    // fonction pour récupérer un tag pour la modification
     async function fetchTagForEditing(id) {
         try {
             const response = await fetch(`${apiUrl}/${id}`, {
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Afficher le formulaire avec les données existantes du tag
+    // affiche le formulaire avec les données existantes du tag
     function showEditForm(tag) {
         overlay.style.display = "flex";
         popupTitle.innerHTML = "Modifier le tag";
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         editForm.setAttribute("data-id", tag.id);
     }
 
-    // Soumettre le formulaire pour modifier un tag
+    // soumettre le formulaire pour modifier un tag
     editForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(editForm);
@@ -151,8 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const updatedTag = await response.json();
                 if (response.ok) {
-                    getTags(); // Rafraîchir la liste des tags
-                    overlay.style.display = "none"; // Fermer le formulaire
+                    getTags(); // rafraîchir la liste des tags
+                    overlay.style.display = "none"; // ferme le formulaire
                 } else {
                     console.error(
                         "Erreur lors de la mise à jour du tag:",
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Fonction pour supprimer un tag
+    // fonction pour supprimer un tag
     async function deleteTag(id) {
         try {
             const response = await fetch(`${apiUrl}/${id}`, {
@@ -183,14 +183,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const deletedTag = await response.json();
             console.log("Tag supprimé:", deletedTag);
-            getTags(); // Rafraîchir la liste des tags
+            getTags(); // rafraîchir la liste des tags
             overlayDelete.style.display = "none";
         } catch (error) {
             console.error("Erreur lors de la suppression du tag:", error);
         }
     }
 
-    // Gérer la confirmation de suppression
+    // gérer la confirmation de suppression
     confirmDeleteBtn.addEventListener("click", () => {
         if (tagIdToDelete) {
             deleteTag(tagIdToDelete);
@@ -199,13 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Gérer l'annulation de la suppression
+    // gérer l'annulation de la suppression
     cancelDeleteBtn.addEventListener("click", () => {
         overlayDelete.style.display = "none";
         tagIdToDelete = null;
     });
 
-    // Masquer le formulaire
+    // masquer le formulaire
     document
         .querySelector(".overlay-delete")
         .addEventListener("click", (event) => {
@@ -215,6 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-    // Charger les tags au chargement de la page
+    // charger les tags au chargement de la page
     getTags();
 });

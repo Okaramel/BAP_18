@@ -6,14 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const formNameInput = document.querySelector("#creator-form #name");
     const formEmailInput = document.querySelector("#creator-form #email");
     const formLinkedinInput = document.querySelector("#creator-form #linkedin");
-    const formImageInput = document.querySelector("#creator-form #image");
+    const formImageInput = document.querySelector(
+        "#creator-form #profile_picture"
+    );
+    const formImagePreview = document.querySelector(
+        "#creator-form #profile_picture_preview"
+    );
     const submitBtn = document.getElementById("submit-btn");
     const overlayDelete = document.querySelector(".overlay-delete");
     const confirmDeleteBtn = document.querySelector(".popup-delete .yes");
     const cancelDeleteBtn = document.querySelector(".popup-delete .no");
     let tagIdToDelete = null;
 
-    // Fonction pour récupérer toutes les étiquettes
+    // fonction pour récupérer toutes les étiquettes
     async function getCreators() {
         try {
             const response = await fetch(apiUrl, {
@@ -33,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Fonction pour afficher les étiquettes dans le DOM
+    // fonction pour afficher les étiquettes dans le DOM
     function displayCreators(creators) {
         const container = document.querySelector(".createur-card");
-        container.innerHTML = ""; // Clear existing content
+        container.innerHTML = ""; // vide le conteneur avant d'ajouter les créateurs
         creators.forEach((creator) => {
             const item = document.createElement("div");
             item.classList.add("creator-item");
@@ -68,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
             container.appendChild(item);
         });
 
-        // Ajouter des écouteurs d'événements pour les boutons de modification et de suppression
+        // ajoute des écouteurs d'événements pour les boutons de modification et de suppression
         document
             .querySelectorAll(".creator-item .edit-btn")
             .forEach((button) => {
@@ -88,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // Fonction pour récupérer une étiquette pour la modification
+    // fonction pour récupérer un créateur pour la modification
     async function fetchCreatorForEditing(id) {
         try {
             const response = await fetch(`${apiUrl}/${id}`, {
@@ -101,40 +106,30 @@ document.addEventListener("DOMContentLoaded", () => {
             const creator = await response.json();
             showEditForm(creator);
         } catch (error) {
-            console.error(
-                "Erreur lors de la récupération de l'étiquette:",
-                error
-            );
+            console.error("Erreur lors de la récupération du créateur:", error);
         }
     }
 
-    // Afficher le formulaire avec les données existantes de l'étiquette
+    // affiche le formulaire avec les données existantes du créateur
     function showEditForm(creator) {
         overlay.style.display = "flex";
         popupTitle.innerHTML = "Modifier le créateur";
 
-        formNameInput.value = creator.name;
-        formEmailInput.value = creator.email;
-        formLinkedinInput.value = creator.linkedin;
-        formImageInput.value = creator.image;
+        if (formNameInput) formNameInput.value = creator.name;
+        if (formEmailInput) formEmailInput.value = creator.email;
+        if (formLinkedinInput) formLinkedinInput.value = creator.linkedin;
+        if (formImagePreview) formImagePreview.src = `/${creator.image}`;
+        formImageInput.value = ""; // réinitialise le champ de type file
         submitBtn.textContent = "Modifier";
 
         editForm.setAttribute("data-action", "update");
         editForm.setAttribute("data-id", creator.id);
     }
 
-    // Soumettre le formulaire pour modifier une étiquette
+    // soumettre le formulaire pour modifier un créateur
     editForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(editForm);
-
-        const data = {
-            image: formData.get("image"),
-            name: formData.get("name"),
-            email: formData.get("email"),
-            linkedin: formData.get("linkedin"),
-        };
-
         const creatorId = editForm.getAttribute("data-id");
 
         if (editForm.getAttribute("data-action") === "update") {
@@ -142,37 +137,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 const response = await fetch(`${apiUrl}/${creatorId}`, {
                     method: "PUT",
                     headers: {
-                        "Content-Type": "application/json",
                         Authorization: `Bearer ${localStorage.getItem(
                             "token"
                         )}`,
                     },
-                    body: JSON.stringify(data),
+                    body: formData,
                 });
 
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(errorText);
+                    throw new Error(await response.text());
                 }
 
-                const updatedCreator = await response.json();
-                if (response.ok) {
-                    getCreators(); // Rafraîchir la liste des étiquettes
-                    location.reload();
-                    overlay.style.display = "none"; // Fermer le formulaire
-                } else {
-                    console.error(
-                        "Erreur lors de la mise à jour de créateur:",
-                        updatedCreator
-                    );
-                }
+                location.reload();
             } catch (error) {
-                console.error("Erreur lors de la requête:", error);
+                console.error("Erreur lors de la mise à jour:", error);
             }
         }
     });
 
-    // Fonction pour supprimer une étiquette
+    // ferme le formulaire d'édition en cliquant en dehors du formulaire
+    document
+        .querySelector(".overlay-creator")
+        .addEventListener("click", (event) => {
+            if (event.target === document.querySelector(".overlay-creator")) {
+                document.querySelector(".overlay-creator").style.display =
+                    "none";
+            }
+        });
+
+    // fonction pour supprimer un créateur
     async function deleteCreator(id) {
         try {
             const response = await fetch(`${apiUrl}/${id}`, {
@@ -189,18 +182,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const deletedCreator = await response.json();
-            console.log("Étiquette supprimée:", deletedCreator);
-            getCreators(); // Rafraîchir la liste des étiquettes
+            console.log("Créateur supprimé:", deletedCreator);
+            getCreators(); // rafraîchie la liste des créateurs
             location.reload();
         } catch (error) {
-            console.error(
-                "Erreur lors de la suppression de l'étiquette:",
-                error
-            );
+            console.error("Erreur lors de la suppression du créateur:", error);
         }
     }
 
-    // Gérer la confirmation de suppression
+    // gére la confirmation de suppression
     confirmDeleteBtn.addEventListener("click", () => {
         if (tagIdToDelete) {
             deleteCreator(tagIdToDelete);
@@ -209,13 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Gérer l'annulation de la suppression
+    // gére l'annulation de la suppression
     cancelDeleteBtn.addEventListener("click", () => {
         overlayDelete.style.display = "none";
         tagIdToDelete = null;
     });
 
-    // masquer le formulaire
+    // masque le formulaire
     document
         .querySelector(".overlay-delete")
         .addEventListener("click", (event) => {
@@ -225,6 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-    // Charger les étiquettes au chargement de la page
+    // ccharge les créateurs au chargement de la page
     getCreators();
 });

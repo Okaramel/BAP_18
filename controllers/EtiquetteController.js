@@ -11,6 +11,11 @@ export async function getEtiquettes(req, res) {
                         tag: true, // inclure les tags associés via EtiquetteTag
                     },
                 },
+                etiquettesInnovation: {
+                    include: {
+                        innovation: true,
+                    },
+                },
             },
         });
         return res.status(200).send(
@@ -34,31 +39,60 @@ export async function getEtiquettes(req, res) {
 export async function getEtiquetteById(req, res) {
     try {
         const id = parseInt(req.params.id);
-        const etiquette = await prisma.etiquette.findUnique({
+        let etiquette = await prisma.etiquette.findUnique({
             where: { id },
             include: {
-                creators: true, // inclure les créateurs associés
+                creators: true,
                 etiquettesTags: {
                     include: {
-                        tag: true, // inclure les tags associés via EtiquetteTag
+                        tag: true,
+                    },
+                },
+                etiquettesInnovation: {
+                    include: {
+                        innovation: true,
                     },
                 },
             },
         });
+
         if (!etiquette) {
-            return res.status(404).send("Étiquette non trouvée");
+            return res.status(404).json({ error: "Étiquette non trouvée" });
         }
-        return res.status(200).send({
-            ...etiquette,
-            tags: etiquette.etiquettesTags.map(
-                (etiquetteTag) => etiquetteTag.tag
-            ),
-        });
+
+        // Nettoyer les chemins d'images
+        if (etiquette.logo)
+            etiquette.logo = etiquette.logo.replace("public/", "");
+        if (etiquette.background)
+            etiquette.background = etiquette.background.replace("public/", "");
+        if (etiquette.imageContainer2)
+            etiquette.imageContainer2 = etiquette.imageContainer2.replace(
+                "public/",
+                ""
+            );
+        if (etiquette.imageContainer3)
+            etiquette.imageContainer3 = etiquette.imageContainer3.replace(
+                "public/",
+                ""
+            );
+        if (etiquette.bannerImage)
+            etiquette.bannerImage = etiquette.bannerImage.replace(
+                "public/",
+                ""
+            );
+        if (etiquette.imageContainer4)
+            etiquette.imageContainer4 = etiquette.imageContainer4.replace(
+                "public/",
+                ""
+            );
+
+        return res.status(200).json(etiquette);
     } catch (error) {
         console.error("Erreur lors de la récupération de l'étiquette:", error);
-        return res
-            .status(500)
-            .send("Erreur lors de la récupération de l'étiquette");
+        return res.status(500).json({
+            error: "Erreur lors de la récupération de l'étiquette",
+            details: error.message,
+        });
     }
 }
 
@@ -66,71 +100,110 @@ export async function getEtiquetteById(req, res) {
 export async function createEtiquette(req, res) {
     try {
         const {
-            slug,
-            image,
             titleProject,
-            description,
-            logo,
-            background,
+            descriptionProject,
             titleContainer1,
             descriptionContainer1,
             titleContainer2,
             descriptionContainer2,
-            imageContainer2,
             titleContainer3,
             descriptionContainer3,
-            imageContainer3,
-            bannerImage,
             quoteBanner,
             titleContainer4,
             descriptionContainer4,
-            imageContainer4,
-            creatorId,
+            creator,
             creators = [],
             tags = [],
-            innovation = [],
+            innovation,
         } = req.body;
 
-        image = req.file.path ? req.file.path : image;
-        background = req.file.path ? req.file.path : background;
-        imageContainer2 = req.file.path ? req.file.path : imageContainer2;
-        imageContainer3 = req.file.path ? req.file.path : imageContainer3;
-        bannerImage = req.file.path ? req.file.path : bannerImage;
-        quoteBanner = req.file.path ? req.file.path : quoteBanner;
-        imageContainer4 = req.file.path ? req.file.path : imageContainer4;
+        // vérifie que les champs obligatoires sont définis
+        if (
+            !titleProject ||
+            !titleContainer1 ||
+            !descriptionContainer1 ||
+            !creator
+        ) {
+            return res.status(400).json({
+                error: "Champs obligatoires manquants",
+                details:
+                    "titleProject, titleContainer1, descriptionContainer1 et creator sont requis",
+            });
+        }
+
+        // génére un slug unique à partir de titleProject
+        let slug = titleProject.toLowerCase().replace(/\s+/g, "-");
+        let existingEtiquette = await prisma.etiquette.findUnique({
+            where: { slug },
+        });
+        let suffix = 1;
+        while (existingEtiquette) {
+            slug = `${titleProject
+                .toLowerCase()
+                .replace(/\s+/g, "-")}-${suffix}`;
+            existingEtiquette = await prisma.etiquette.findUnique({
+                where: { slug },
+            });
+            suffix++;
+        }
+
+        // récupére les chemins des fichiers téléchargés avec vérification
+        const logo = req.files?.logo
+            ? req.files.logo[0].path.replace("public/", "")
+            : null;
+        const background = req.files?.background
+            ? req.files.background[0].path.replace("public/", "")
+            : null;
+        const imageContainer2 = req.files?.imageContainer2
+            ? req.files.imageContainer2[0].path.replace("public/", "")
+            : null;
+        const imageContainer3 = req.files?.imageContainer3
+            ? req.files.imageContainer3[0].path.replace("public/", "")
+            : null;
+        const bannerImage = req.files?.bannerImage
+            ? req.files.bannerImage[0].path.replace("public/", "")
+            : null;
+        const imageContainer4 = req.files?.imageContainer4
+            ? req.files.imageContainer4[0].path.replace("public/", "")
+            : null;
 
         const newEtiquette = await prisma.etiquette.create({
             data: {
                 slug,
-                image,
                 titleProject,
-                description,
+                descriptionProject: descriptionProject || null,
                 logo,
                 background,
                 titleContainer1,
                 descriptionContainer1,
-                titleContainer2,
-                descriptionContainer2,
+                titleContainer2: titleContainer2 || null,
+                descriptionContainer2: descriptionContainer2 || null,
                 imageContainer2,
-                titleContainer3,
-                descriptionContainer3,
+                titleContainer3: titleContainer3 || null,
+                descriptionContainer3: descriptionContainer3 || null,
                 imageContainer3,
                 bannerImage,
-                quoteBanner,
-                titleContainer4,
-                descriptionContainer4,
+                quoteBanner: quoteBanner || null,
+                titleContainer4: titleContainer4 || null,
+                descriptionContainer4: descriptionContainer4 || null,
                 imageContainer4,
-                creatorId: parseInt(creatorId),
-                creators: {
-                    connect: creators.map((creator) => ({
-                        id: parseInt(creator),
-                    })),
-                },
-                etiquettesTags: {
-                    create: tags.map((tag) => ({
-                        tag: { connect: { id: parseInt(tag) } },
-                    })),
-                },
+                creatorId: parseInt(creator),
+                creators:
+                    creators.length > 0
+                        ? {
+                              connect: creators.map((id) => ({
+                                  id: parseInt(id),
+                              })),
+                          }
+                        : undefined,
+                etiquettesTags:
+                    tags.length > 0
+                        ? {
+                              create: tags.map((tagId) => ({
+                                  tag: { connect: { id: parseInt(tagId) } },
+                              })),
+                          }
+                        : undefined,
                 etiquettesInnovation: innovation
                     ? {
                           create: [
@@ -165,13 +238,19 @@ export async function createEtiquette(req, res) {
 }
 
 // fonction pour supprimer une étiquette
-
 export async function deleteEtiquette(req, res) {
     try {
         const id = parseInt(req.params.id);
 
         // supprimer les relations dans EtiquetteTag
         await prisma.etiquetteTag.deleteMany({
+            where: {
+                etiquetteId: id,
+            },
+        });
+
+        // supprimer les relations dans EtiquetteInnovation
+        await prisma.etiquetteInnovation.deleteMany({
             where: {
                 etiquetteId: id,
             },
@@ -192,58 +271,114 @@ export async function deleteEtiquette(req, res) {
             .send("Erreur lors de la suppression de l'étiquette");
     }
 }
-
 // fonction pour mettre à jour une étiquette
 export async function updateEtiquette(req, res) {
     try {
         const id = parseInt(req.params.id);
-        const body = req.body;
-        console.log("Request body:", body); // log du corps de la requête
+        const {
+            titleProject,
+            description,
+            titleContainer1,
+            descriptionContainer1,
+            titleContainer2,
+            descriptionContainer2,
+            titleContainer3,
+            descriptionContainer3,
+            quoteBanner,
+            titleContainer4,
+            descriptionContainer4,
+            creator,
+            creators = [],
+            tags = [],
+            innovation,
+        } = req.body;
+
+        // Récupérer les chemins des fichiers téléchargés s'ils existent
+        const logo = req.files?.logo ? req.files.logo[0].path : undefined;
+        const background = req.files?.background
+            ? req.files.background[0].path
+            : undefined;
+        const imageContainer2 = req.files?.imageContainer2
+            ? req.files.imageContainer2[0].path
+            : undefined;
+        const imageContainer3 = req.files?.imageContainer3
+            ? req.files.imageContainer3[0].path
+            : undefined;
+        const bannerImage = req.files?.bannerImage
+            ? req.files.bannerImage[0].path
+            : undefined;
+        const imageContainer4 = req.files?.imageContainer4
+            ? req.files.imageContainer4[0].path
+            : undefined;
 
         const updatedEtiquette = await prisma.etiquette.update({
             where: {
                 id: id,
             },
             data: {
-                slug: body.slug,
-                image: body.image,
-                title: body.title,
-                description: body.description,
-                creators: {
-                    set: [], // supprimer toutes les relations existantes
-                    connect: body.creators.map((creator) => ({
-                        // connexion multiple des créateurs sélectionnés
-                        id: creator.id,
-                    })),
-                },
+                slug: titleProject.toLowerCase().replace(/\s+/g, "-"),
+                titleProject,
+                descriptionProject: description,
+                ...(logo && { logo }),
+                ...(background && { background }),
+                titleContainer1,
+                descriptionContainer1,
+                ...(titleContainer2 && { titleContainer2 }),
+                ...(descriptionContainer2 && { descriptionContainer2 }),
+                ...(imageContainer2 && { imageContainer2 }),
+                ...(titleContainer3 && { titleContainer3 }),
+                ...(descriptionContainer3 && { descriptionContainer3 }),
+                ...(imageContainer3 && { imageContainer3 }),
+                ...(bannerImage && { bannerImage }),
+                ...(quoteBanner && { quoteBanner }),
+                ...(titleContainer4 && { titleContainer4 }),
+                ...(descriptionContainer4 && { descriptionContainer4 }),
+                ...(imageContainer4 && { imageContainer4 }),
+                creatorId: parseInt(creator),
+                creators: creators?.length
+                    ? {
+                          set: [], // supprime les relations existantes
+                          connect: creators.map((id) => ({
+                              id: parseInt(id),
+                          })),
+                      }
+                    : undefined,
                 etiquettesTags: {
-                    deleteMany: {}, // supprimer toutes les relations existantes
-                    create: body.tags.map((tag) => ({
-                        // créer de nouvelles relations
-                        tag: { connect: { id: tag.id } },
+                    deleteMany: {}, // supprime les relations existantes
+                    create: tags.map((tagId) => ({
+                        tag: { connect: { id: parseInt(tagId) } },
                     })),
                 },
+                etiquettesInnovation: innovation
+                    ? {
+                          deleteMany: {}, // supprime les relations existantes
+                          create: [
+                              {
+                                  innovation: {
+                                      connect: { id: parseInt(innovation) },
+                                  },
+                              },
+                          ],
+                      }
+                    : undefined,
             },
             include: {
                 creators: true,
                 etiquettesTags: {
-                    // inclure les tags associés via EtiquetteTag
-                    include: {
-                        tag: true,
-                    },
+                    include: { tag: true },
+                },
+                etiquettesInnovation: {
+                    include: { innovation: true },
                 },
             },
         });
-        return res.status(200).send({
-            ...updatedEtiquette,
-            tags: updatedEtiquette.etiquettesTags.map(
-                (etiquetteTag) => etiquetteTag.tag // inclure les tags associés via EtiquetteTag
-            ),
-        });
+
+        return res.status(200).json(updatedEtiquette);
     } catch (error) {
-        console.error("Erreur lors de la mise à jour de l'étiquette:", error); // log des erreurs
-        return res
-            .status(500)
-            .json({ error: "Erreur lors de la mise à jour de l'étiquette" });
+        console.error("Erreur lors de la mise à jour de l'étiquette:", error);
+        return res.status(500).json({
+            error: "Erreur lors de la mise à jour de l'étiquette",
+            details: error.message,
+        });
     }
 }
