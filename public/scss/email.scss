@@ -2,15 +2,27 @@
 // sass public/scss/email.scss:public/css/email.css --watch --style=compressed
 
 .header {
+    height: 100dvh;
+    min-height: 100vh;
+
     padding: 0 8rem;
+
+    display: flex;
+    flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    gap: 1.5rem;
 
     background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/img/email_header.png"), rgb(0, 0, 0);
 
     background-position: bottom left;
     background-repeat: no-repeat;
     background-size: contain;
+
+    & * {
+        margin: 0;
+        color: variables.$white;
+    }
 
     &_email {
         display: flex;
