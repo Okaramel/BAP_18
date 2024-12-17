@@ -144,7 +144,7 @@
         width: 100%;
         display: grid;
         // flex: row;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     }
 
     &_article {
@@ -176,6 +176,13 @@
 
             &_text {
                 padding: 1.5rem;
+            }
+            &_description {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 5;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
