@@ -5,9 +5,16 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "npm-run-all --parallel watch-node watch-main",
+        "dev": "npm-run-all --parallel watch-node watch-main watch-index watch-etiquettePage watch-email watch-admin  watch-loginAdmin",
         "watch-node": "node --watch index.js",
-        "watch-main": "sass --watch public/scss/admin.scss public/css/admin.css",
+        
+        "watch-main": "sass --watch public/scss/main.scss public/css/main.css --style=compressed",
+        "watch-index": "sass --watch public/scss/index.scss public/css/index.css --style=compressed",
+        "watch-etiquettePage": "sass --watch public/scss/etiquettePage.scss public/css/etiquettePage.css --style=compressed",
+        "watch-email": "sass --watch public/scss/email.scss public/css/email.css --style=compressed",
+        "watch-admin": "sass --watch public/scss/admin.scss public/css/admin.css --style=compressed",
+        "watch-loginAdmin": "sass --watch public/scss/loginAdmin.scss public/css/loginAdmin.css --style=compressed",
+
         "create-innovations": "node controllers/createInnovation.js"
     },
     "keywords": [],
