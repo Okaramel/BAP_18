@@ -24,10 +24,11 @@
         display: flex;
         padding: 10px 400px 0 100px;
         align-items: center;
+        gap: 1rem;
         img {
-            border-radius: 100%;
-            width: 156px;
             height: 196px;
+            aspect-ratio: 1/1;
+            border-radius: 100%;
             object-fit: cover;
         }
     }
