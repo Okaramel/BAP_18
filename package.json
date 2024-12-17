@@ -7,7 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "npm-run-all --parallel watch-node watch-main",
         "watch-node": "node --watch index.js",
-        "watch-main": "sass --watch public/scss/etiquettePage.scss public/css/etiquettePage.css",
+        "watch-main": "sass --watch public/scss/admin.scss public/css/admin.css",
         "create-innovations": "node controllers/createInnovation.js"
     },
     "keywords": [],
