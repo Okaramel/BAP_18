@@ -28,9 +28,9 @@
 
     & .socials {
         display: flex;
-        justify-content: center;
         flex-flow: row nowrap;
         gap: 1rem;
+        justify-content: space-between;
     }
 }
 
@@ -39,6 +39,6 @@
         flex-flow: column nowrap; /* Passer en colonne */
         align-items: center; /* Centrer les éléments dans la colonne */
         text-align: center; /* Centrer le texte si nécessaire */
-        gap: 2rem; 
+        gap: 2rem;
     }
 }
