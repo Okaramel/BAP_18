@@ -29,18 +29,21 @@ Projet en équipe avec un client IFT (Institute for Future Technologies) qui a p
 
 -   Ecrire npm i pour installer les modules
 -   Modifier le DATABASE_URL dans le .env
--   Créer une nouvelle migration npx prisma migrate dev --name add_profile
+-   Ouvrir MAMP/Laragon
+-   Créer une base de données 'ift'
+-   Créer une nouvelle migration npx prisma migrate dev
 -   Faire npx prisma generate
 -   Ecrire dans la console VS CODE "npm run create-innovations" pour créer les innovations
 
 ## Créer Etiquettes/Créateurs/Tags
 
+-   Dans le terminal écrire npm run dev pour lancer le serveur
 -   Créer sur Postman un identifiant POST avec l'url http://localhost:3000/admin
     EXEMPLE :
     {
     "email": "bonjour@gmail.fr" ,
     "password": "123"
     }
--   Ecrire http://localhost:3000/consolelogin
+-   Ecrire sur internet l'url : http://localhost:3000/consolelogin
 -   Se connecter avec les logins
 -   Créer les etiquettes/créateurs/tags

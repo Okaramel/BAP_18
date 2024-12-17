@@ -30,3 +30,24 @@ export async function getInnovationById(req, res) {
             .send("Erreur lors de la récupération de l'innovation");
     }
 }
+
+export async function deleteInnovation(req, res) {
+    try {
+        const id = parseInt(req.params.id);
+        await prisma.etiquetteInnovation.deleteMany({
+            where: {
+                innovation: { id: id },
+            },
+        });
+        const innovation = await prisma.innovation.delete({
+            where: { id },
+        });
+
+        return res.status(200).send(innovation);
+    } catch (error) {
+        console.error("Erreur lors de la suppression de l'innovation:", error);
+        return res
+            .status(500)
+            .send("Erreur lors de la suppression de l'innovation");
+    }
+}
