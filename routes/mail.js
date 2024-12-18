@@ -1,10 +1,9 @@
 import express from "express";
-import { getMail, createMail } from "../controllers/MailController.js";
-import { verifyToken } from "../middleware/TokenMiddleware.js";
+import { getMails, createMail } from "../controllers/MailController.js";
 
 const router = express.Router();
 
-router.get("/", verifyToken, getMail);
-router.post("/", verifyToken, createMail);
+router.get("/", getMails);
+router.post("/", createMail);
 
 export default router;
