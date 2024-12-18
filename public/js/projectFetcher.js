@@ -1,6 +1,6 @@
 function fetchAll() {
     // get all projects from database
-    fetch(`http://localhost:3000/etiquette/`, {
+    return fetch(`http://localhost:3000/etiquette/`, {
         method: "GET",
     })
         .then((response) => {
@@ -15,28 +15,13 @@ function fetchAll() {
                 }
             }
 
-            // transform into json data
+            // transform api response body into json data
             return response.json();
         })
         .then((data) => {
-            // process json data
             console.log(data);
-
-            let gallery = document.querySelector(".section_container");
-
-            // create new article block for each project
-            data.forEach((project) => {
-                let newProject = document.createElement("article");                                 // create new block
-                newProject.innerHTML = `
-                <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
-                        <div class="article_text">
-                            <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
-                            <p class="article_description">${project.descriptionProject}</p>
-                        </div>
-                `;                                                                                  // fill block
-                newProject.classList.add("section_article");                                        // add block class
-                gallery.appendChild(newProject);                                                    // add block to container
-            });
+            localStorage.setItem("projects", JSON.stringify(data));
+            return data;
         })
         .catch((error) => {
             // process errors
@@ -48,11 +33,74 @@ function fetchAll() {
 
 // function fetchSearch() {}
 
-// function displayAll() {}
+async function displayAll() {
+    // const projects = localStorage.getItem("projects");
+    const projects = await fetchAll();
+    console.log(projects);
 
-// function displaySearch() {}
+    if (projects) {
+        console.log(projects);
+
+        let gallery = document.querySelector(".section_container");
+        gallery.innerHTML = "";
+
+        // create new article block for each project
+        projects.forEach((project) => {
+            let newProject = document.createElement("article"); // create new block
+            newProject.innerHTML = `
+                <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
+                        <div class="article_text">
+                            <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
+                            <p class="article_description">${project.descriptionProject}</p>
+                        </div>
+                `; // fill block
+            newProject.classList.add("section_article"); // add block class
+            gallery.appendChild(newProject); // add block to container
+        });
+    } else {
+        console.log("projects are not defined");
+    }
+}
+
+let searchForm = document.querySelector(".header_search");
+
+searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let search = document.querySelector("#search_value");
+    let gallery = document.querySelector(".section_container");
+    gallery.innerHTML = "";
+
+    if (search.value != "") {
+        let projects = JSON.parse(localStorage.getItem("projects"));
+        console.log(projects);
+
+        // search for project titles
+        // create new article block for each project
+        projects.forEach((project) => {
+            if (project.titleProject.includes(search.value)) {
+                let newProject = document.createElement("article"); // create new block
+                newProject.innerHTML = `
+                <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
+                        <div class="article_text">
+                            <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
+                            <p class="article_description">${project.descriptionProject}</p>
+                        </div>
+                `; // fill block
+                newProject.classList.add("section_article"); // add block class
+                gallery.appendChild(newProject); // add block to container
+            } else {
+                gallery.innerHTML = `<p>Couldn't find any project with this title</p>`;
+            }
+        });
+    } else {
+        displayAll();
+    }
+});
+
+function displaySearch() {}
 
 // trigger function on page load
-window.addEventListener("load", async () => {
-    fetchAll();
+window.addEventListener("DOMContentLoaded", () => {
+    displayAll();
 });
