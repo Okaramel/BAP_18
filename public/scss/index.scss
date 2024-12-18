@@ -8,8 +8,7 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 1.5rem;
-    background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%),
-        url("/img/index_header.webp") no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%), url("/img/index_header.webp") no-repeat center center/cover;
 
     & * {
         margin: 0;
@@ -76,11 +75,7 @@
         display: flex;
         flex-flow: column nowrap;
         background: variables.$black;
-        background: linear-gradient(
-                rgba(0, 0, 0, 0.6) 0%,
-                rgba(0, 0, 0, 0.9) 100%
-            ),
-            url(/img/index_header.webp) no-repeat center center / cover;
+        background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%), url(/img/index_header.webp) no-repeat center center / cover;
 
         &_text {
             word-break: break-word;
@@ -99,39 +94,46 @@
         width: 100%;
         display: grid;
         // grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-        grid-template-columns: repeat(4, 1fr);
+        // grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-flow: row wrap;
     }
 
     &_article {
+        display: flex;
+        flex-flow: column nowrap;
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+
+        @media (min-width: 480px) {
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
+        }
+
+        @media (min-width: 960px) {
+            -ms-flex: 25%;
+            flex: 25%;
+            max-width: 25%;
+        }
+
         & .article {
             gap: 10px;
             padding: 10px;
-            &_img {
-                height: fit-content;
-                width: fit-content;
 
+            &_img {
                 & img {
-                    position: relative;
                     width: 100%;
                     aspect-ratio: 1/1;
                     object-fit: cover;
                 }
-
-                // &::after {
-                //     /* HTML: <div class="triangle"></div> */
-                //     position: absolute;
-                //     bottom: 0;
-                //     left: 0;
-                //     width: 180px;
-                //     aspect-ratio: 1 / cos(30deg);
-                //     clip-path: polygon(50% 0, 100% 100%, 0 100%);
-                //     background: linear-gradient(45deg, #fa6900, #c02942);
-                // }
             }
 
             &_text {
                 padding: 1.5rem;
             }
+
             &_description {
                 display: -webkit-box;
                 -webkit-box-orient: vertical;

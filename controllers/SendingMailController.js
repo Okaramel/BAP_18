@@ -1,25 +1,21 @@
 import nodemailer from "nodemailer";
 
-
-// Paramètre qui va permettre à envoyer des mails (trouver l'host, le port etc...)
-const transporter = nodemailer.createTransport(
-    {
-        secure: true,
-        host: 'smtp.gmail.com',
-        port: 465,
-        auth:{
-            user: 'bap18ift@gmail.com',
-            pass: 'gkzqxextjwssotah'
-        }
-    }
-);
+const transporter = nodemailer.createTransport({
+    secure: true,
+    host: "smtp.gmail.com",
+    port: 465,
+    auth: {
+        user: "bap18ift@gmail.com",
+        pass: "gkzqxextjwssotah",
+    },
+});
 
 // Structure de l'email qui va être envoyer selon le schéma mail
 export function sendMail(to, sub, msg) {
     transporter.sendMail({
-        to:to,
-        subject:sub,
-        html:msg
+        to: to,
+        subject: sub,
+        html: msg,
     });
 }
 
@@ -41,9 +37,7 @@ export const SendingMailController = async (req, res) => {
             <p>Vous avez été enregistré comme ${type}.</p>`
         );
     } catch (error) {
-        console.error('Erreur lors de l\'envoi de l\'email :', error);
-        res.status(500).json({ message: 'Erreur lors de l\'envoi de l\'email.' });
+        console.error("Erreur lors de l'envoi de l'email :", error);
+        res.status(500).json({ message: "Erreur lors de l'envoi de l'email." });
     }
 };
-
-
