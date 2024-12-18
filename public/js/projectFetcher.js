@@ -72,7 +72,7 @@ searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     let search = document.querySelector("#search_value");
-    search = search.value;
+    search = search.value.toLowerCase();
 
     gallery.innerHTML = "";
 
@@ -83,13 +83,12 @@ searchForm.addEventListener("submit", (event) => {
         // search for project titles
         // create new article block for each project
         projects.forEach((project) => {
-            console.log(project.titleProject);
-            if (project.titleProject.includes(search)) {
+            if (project.titleProject.toLowerCase().includes(search)) {
                 foundProjects += 1;
                 addProject(project);
             }
         });
-        
+
         if (foundProjects == 0) {
             gallery.innerHTML = `<p>Couldn't find any project</p>`;
         }
