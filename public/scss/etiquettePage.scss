@@ -1,77 +1,6 @@
-// sass FRONT/scss/main.scss:FRONT/css/style.css --watch --style=compressed
+// sass public/scss/etiquettePage.scss:public/css/etiquettePage.css --watch --style=compressed
 
 @use "variables";
-@use "mixins";
-@use "navbar";
-@use "header";
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-
-:root {
-    font-size: 20px;
-}
-
-* {
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    width: 100%;
-}
-
-// Titles and Text
-
-h1 {
-    font-size: 4rem;
-    font-weight: 800;
-}
-@media (max-width: 768px) {
-    h1 {
-        font-size: 3rem;
-    }
-}
-
-h2 {
-    font-size: 2rem;
-    font-weight: 600;
-}
-
-h3 {
-    font-size: 2.5rem;
-    font-weight: 800;
-}
-
-h4 {
-    font-size: 1.5rem;
-    font-weight: 750;
-}
-
-p {
-    font-size: 1rem;
-}
-
-// Anchors
-
-a,
-a:link,
-a:active,
-a:visited {
-    color: variables.$black;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
 
 .banner-container {
     position: relative;
@@ -95,10 +24,11 @@ a:visited {
         display: flex;
         padding: 10px 400px 0 100px;
         align-items: center;
+        gap: 1rem;
         img {
-            border-radius: 100%;
-            width: 156px;
             height: 196px;
+            aspect-ratio: 1/1;
+            border-radius: 100%;
             object-fit: cover;
         }
     }
@@ -167,6 +97,7 @@ a:visited {
         align-items: center;
         padding: 16px 0;
         margin-bottom: 64px;
+        line-height: 1.7;
 
         h1 {
             padding: 0 100px;
@@ -202,7 +133,7 @@ a:visited {
         }
         img {
             padding: 0 100px 0 0;
-            width: 500px;
+            width: 50%;
         }
     }
 
@@ -231,7 +162,7 @@ a:visited {
         }
         img {
             padding: 0 0 0 100px;
-            width: 500px;
+            width: 50%;
         }
     }
 
@@ -275,6 +206,9 @@ a:visited {
             font-weight: 400;
             line-height: 1.7;
         }
+        img {
+            width: 50%;
+        }
     }
 }
 
@@ -293,6 +227,9 @@ hr {
     .banner-container {
         .title {
             padding: 0 20px;
+            h1 {
+                margin-top: 12px;
+            }
             img {
                 width: 96px;
                 height: 96px;
@@ -354,8 +291,33 @@ hr {
         .fourth-container {
             padding: 0 20px;
         }
-        img {
-            width: 100%;
+    }
+}
+
+@media (max-width: 1010px) {
+    .second-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .third-container {
+        flex-direction: column !important;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1130px) {
+    .title {
+        padding: 0 20px 0 20px !important;
+    }
+    .middle {
+        .description {
+            padding: 0 20px 0 20px !important;
         }
+    }
+    .tag {
+        padding: 0 20px 0 20px !important;
+    }
+    .creator {
+        padding: 0 20px 0 20px !important;
     }
 }

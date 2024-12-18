@@ -1,53 +1,50 @@
-const apiUrl = "http://localhost:3000/creators";
+// Sélection des éléments HTML
+const form = document.getElementById("header_email");
+const responseMessage = document.getElementById("responseMessage");
 
-async function getCreators() {
+// Fonction pour envoyer une requête POST à l'API d'envoi d'email
+async function sendEmail(event) {
+    event.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+
+    // Récupération des données du formulaire
+    const email = document.getElementById("email").value;
+    const type = document.querySelector('input[name="type"]:checked').value;
+
+    // Vérification que l'email est valide
+    if (!email) {
+        responseMessage.textContent = "Veuillez entrer une adresse email valide.";
+        responseMessage.style.color = "red";
+        return;
+    }
+
     try {
-        const response = await fetch(apiUrl, {
-            method: "GET",
+        // Envoi de la requête POST au serveur
+        const response = await fetch("/mail", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
+            body: JSON.stringify({ email, type }),
         });
-        const creators = await response.json();
-        displayCreators(creators);
-    } catch (error) {
-        console.error("Erreur lors de la récupération des createurs:", error);
+
+        // Gestion de la réponse
+        if (response.ok) {
+            const result = await response.json();
+            responseMessage.textContent = result.message;
+            responseMessage.style.color = "green";
+            window.location.href =  "http://localhost:3000/index";
+        }
+
+        if (response.status === 200){
+            window.location.href =  "http://localhost:3000/index";
+        }
+    } catch (err) {
+        // Gestion des erreurs réseau ou autres
+        console.error("Erreur lors de la requête : ", err);
+        responseMessage.textContent = "Une erreur est survenue. Veuillez réessayer plus tard.";
+        responseMessage.style.color = "red";
     }
 }
 
-// Fonction pour afficher les étiquettes dans le DOM
-function displayCreators(creators) {
-    const container = document.querySelector(".createur-card");
-    container.innerHTML = ""; // Clear existing content
-    creators.forEach((creator) => {
-        const item = document.createElement("div");
-        item.classList.add("creator-item");
-        item.innerHTML = `
-            <div class="details-btn">${creator.name}</div>
-            <div class="action-btn">
-                <svg class="edit-btn" data-id="${creator.id}"
-                                xmlns="http://www.w3.org/2000/svg"
-                                height="24px"
-                                viewBox="0 -960 960 960"
-                                width="24px"
-                                fill="#e8eaed"
-                            >
-                                <path
-                                    d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"
-                                />
-                            </svg>
-                <svg class="remove-btn" data-id="${creator.id}"
-                                xmlns="http://www.w3.org/2000/svg"
-                                height="24px"
-                                viewBox="0 -960 960 960"
-                                width="24px"
-                                fill="#e8eaed"
-                            >
-                                <path d="M200-440v-80h560v80H200Z" />
-                            </svg>
-            </div>
-        `;
-        container.appendChild(item);
-    });
-}
+// Ajout de l'événement au formulaire
+form.addEventListener("submit", sendEmail);
