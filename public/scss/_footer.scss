@@ -34,7 +34,7 @@
     }
 }
 
-// Permet de gérer la taille des élements à partir de la taille de l'appareil
+// Adapter les éléments selon la taille de l'écran
 @media (max-width: 1000px) {
     .footer {
         flex-flow: column nowrap; /* Passer en colonne */

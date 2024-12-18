@@ -39,18 +39,18 @@
 
 .menu_bars {
     width: 30px;
-    margin: 10px;
+    margin: 5px;
     cursor: pointer;
 }
 
 .menu_logo {
     width: 50px;
+    margin: 5px;
 }
 
 .menu_bouton {
     display: flex;
-    justify-content: baseline;
-    gap: 7rem;
+    justify-content: space-between;
 }
 
 .menu_burger {

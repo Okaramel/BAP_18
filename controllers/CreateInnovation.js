@@ -24,7 +24,7 @@ async function createInnovations() {
         },
     ];
 
-    // On crée l'innovation
+    // Création de l'innovation
     try {
         for (const innovation of innovations) {
             const existingInnovation = await prisma.innovation.findUnique({
