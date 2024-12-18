@@ -10,15 +10,23 @@
         <header class="header">
             <h1>Welcome</h1>
             <p>Please enter your email to access this exposition</p>
-            <form action="" class="header_email">
+            <form action="/send_mail" id="header_email">
                 <input type="email" inputmode="email" name="email" id="email" placeholder="Email" />
+                <label>
+                    <input type="radio" name="type" id="type_entreprise" class="type" value="entreprise"> Entreprise
+                </label>
+                <label>
+                    <input type="radio" name="type" id="type_particulier" class="type" value="particulier" checked> Particulier
+                </label>
                 <!-- <button type="submit">Send <i class="fa-solid fa-paper-plane"></i></button> -->
                 <button type="submit">Send</i></button>
             </form>
+            <div id="responseMessage"></div>
         </header>
 
         <%- include('./partials/footer.ejs') %>
 
-        <script src="/js/script.js"></script>
+        <script src="/js/adminScript/Mail/ShowMail.js"></script>
+        <script src="/js/emailServer/Sendingmail.js"></script>
     </body>
 </html>

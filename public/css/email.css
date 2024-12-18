@@ -2,27 +2,32 @@
   padding: 0 8rem;
   align-items: flex-end;
   justify-content: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("/img/email_header.png"), rgb(0, 0, 0);
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
-.header_email {
+
+#header_email {
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
 }
-.header_email * {
+#header_email * {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border: none;
   border-radius: 0.5rem;
 }
-.header_email button {
+#header_email button {
   background-color: hsl(0, 0%, 30%);
   color: hsl(0, 0%, 98%);
   font-weight: 600;
 }
-.header_email button:hover {
+#header_email button:hover {
   cursor: pointer;
 }
-.header_email input {
+#header_email input {
   color: black;
 }
 

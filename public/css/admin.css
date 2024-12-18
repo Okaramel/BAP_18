@@ -97,7 +97,6 @@ body {
   color: #fff;
   border: none;
   border-radius: 5px;
-  margin-left: 10px;
   cursor: pointer;
   width: 30px;
   height: 30px;
@@ -304,6 +303,10 @@ body {
 }
 .popup-delete .btn .yes:hover {
   background-color: #ff0000;
+}
+
+.details-btn {
+  font-size: smaller;
 }
 
 /*# sourceMappingURL=admin.css.map */

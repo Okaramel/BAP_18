@@ -5,6 +5,7 @@ import etiquetteRouter from "./etiquette.js";
 import creatorRouter from "./creator.js";
 import tagRouter from "./tag.js";
 import mailRouter from "./mail.js";
+import SendingMailControllerRouter from "./sendingmail.js";
 import innovationRouter from "./innovation.js";
 import uploadRouter from "./upload.js"; // Importer le routeur d'upload
 
@@ -50,6 +51,7 @@ router.use("/etiquette", etiquetteRouter);
 router.use("/creator", creatorRouter);
 router.use("/tag", tagRouter);
 router.use("/mail", mailRouter);
+router.use("/sendingmail", SendingMailControllerRouter);
 router.use("/innovation", innovationRouter);
 router.use("/upload", uploadRouter); // Utiliser le routeur d'upload
 

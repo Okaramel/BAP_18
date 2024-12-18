@@ -11,34 +11,36 @@
     background-position: bottom left;
     background-repeat: no-repeat;
     background-size: contain;
+}
 
-    &_email {
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 1rem;
+#header_email {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
 
-        & * {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            border: none;
-            border-radius: 0.5rem;
-        }
+    & * {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 0.5rem;
+    }
 
-        & button {
-            background-color: variables.$darkgrey;
-            color: variables.$white;
-            font-weight: 600;
-        
-            &:hover {
-                cursor: pointer;
-            }
-        }
-
-        input {
-            color: black;
+    & button {
+        background-color: variables.$darkgrey;
+        color: variables.$white;
+        font-weight: 600;
+    
+        &:hover {
+            cursor: pointer;
         }
     }
+
+    input {
+        color: black;
+    }
 }
+
+
 
 input[type=number]::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;
