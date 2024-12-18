@@ -1,7 +1,7 @@
 @use "variables";
 
 .footer {
-    padding: 4rem;
+    padding: 4rem; 
     display: flex;
     flex-flow: row nowrap;
     align-items: start;
@@ -34,6 +34,7 @@
     }
 }
 
+// Permet de gérer la taille des élements à partir de la taille de l'appareil
 @media (max-width: 1000px) {
     .footer {
         flex-flow: column nowrap; /* Passer en colonne */

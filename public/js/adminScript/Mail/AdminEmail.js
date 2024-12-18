@@ -3,6 +3,7 @@ const cancelDeleteBtn = document.querySelector(".overlay-delete .no");
 const overlayDelete = document.querySelector(".overlay-delete");
 let emailIdToDelete = null;
 
+//On va chercher depuis MailController tous les emails
 async function getMails() {
     try {
         const response = await fetch("http://localhost:3000/mail", {

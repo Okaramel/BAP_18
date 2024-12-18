@@ -1,6 +1,7 @@
 import prisma from "../config/prisma.js";
 import path from "path";
 
+// Création de différentes innovations
 async function createInnovations() {
     const innovations = [
         {
@@ -23,6 +24,7 @@ async function createInnovations() {
         },
     ];
 
+    // On crée l'innovation
     try {
         for (const innovation of innovations) {
             const existingInnovation = await prisma.innovation.findUnique({

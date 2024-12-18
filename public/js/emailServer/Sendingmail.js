@@ -1,4 +1,5 @@
 
+// On va chercher les informations qu'on veut dans le SendingMailController
 async function sendEmail(email, type) {
     try {
         const response = await fetch('http://localhost:3000/sendingmail', {
@@ -14,10 +15,10 @@ async function sendEmail(email, type) {
 
         if (response.ok) {
             const data = await response.json();
-            alert(data.message); // Afficher le message de succès à l'utilisateur
+            alert(data.message);
         } else {
             const errorData = await response.json();
-            alert(`Erreur : ${errorData.message}`); // Afficher le message d'erreur
+            alert(`Erreur : ${errorData.message}`);
         }
     } catch (error) {
         console.error('Erreur lors de la requête :', error);

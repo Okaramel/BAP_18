@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+// Structure de l'email qui va être envoyer selon le schéma mail
 export function sendMail(to, sub, msg) {
     transporter.sendMail({
         to: to,
@@ -18,6 +19,8 @@ export function sendMail(to, sub, msg) {
     });
 }
 
+
+// Structure remplie pour le mail 
 export const SendingMailController = async (req, res) => {
     const { email, type } = req.body;
 

@@ -1,5 +1,7 @@
 const form = document.querySelector("form");
 
+
+// Depuis le form, on cherche à se connecter avec les identifications de l'admin
 form.addEventListener("submit", async (event) => {
     try {
         event.preventDefault();
@@ -7,6 +9,7 @@ form.addEventListener("submit", async (event) => {
         const email = document.querySelector("#email").value;
         const password = document.querySelector("#password").value;
 
+        //Connexion au LoginController
         const response = await fetch("http://localhost:3000/login", {
             method: "POST",
             headers: {
