@@ -97,6 +97,7 @@
         align-items: center;
         padding: 16px 0;
         margin-bottom: 64px;
+        line-height: 1.7;
 
         h1 {
             padding: 0 100px;
@@ -132,7 +133,7 @@
         }
         img {
             padding: 0 100px 0 0;
-            width: 500px;
+            width: 50%;
         }
     }
 
@@ -161,7 +162,7 @@
         }
         img {
             padding: 0 0 0 100px;
-            width: 500px;
+            width: 50%;
         }
     }
 
@@ -205,6 +206,9 @@
             font-weight: 400;
             line-height: 1.7;
         }
+        img {
+            width: 50%;
+        }
     }
 }
 
@@ -224,7 +228,7 @@ hr {
         .title {
             padding: 0 20px;
             h1 {
-                margin-top: 8px;
+                margin-top: 12px;
             }
             img {
                 width: 96px;
@@ -287,8 +291,33 @@ hr {
         .fourth-container {
             padding: 0 20px;
         }
-        img {
-            width: 100%;
+    }
+}
+
+@media (max-width: 1010px) {
+    .second-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .third-container {
+        flex-direction: column !important;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1130px) {
+    .title {
+        padding: 0 20px 0 20px !important;
+    }
+    .middle {
+        .description {
+            padding: 0 20px 0 20px !important;
         }
+    }
+    .tag {
+        padding: 0 20px 0 20px !important;
+    }
+    .creator {
+        padding: 0 20px 0 20px !important;
     }
 }
