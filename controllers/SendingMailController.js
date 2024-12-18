@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 
+
+// Paramètre qui va permettre à envoyer des mails (trouver l'host, le port etc...)
 const transporter = nodemailer.createTransport(
     {
         secure: true,
@@ -12,6 +14,7 @@ const transporter = nodemailer.createTransport(
     }
 );
 
+// Structure de l'email qui va être envoyer selon le schéma mail
 export function sendMail(to, sub, msg) {
     transporter.sendMail({
         to:to,
@@ -20,6 +23,8 @@ export function sendMail(to, sub, msg) {
     });
 }
 
+
+// Structure remplie pour le mail 
 export const SendingMailController = async (req, res) => {
     const { email, type } = req.body;
 

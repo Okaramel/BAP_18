@@ -1,10 +1,12 @@
 import prisma from "../config/prisma.js";
 
+// on définit les types (déjà fait dans la database)
 const MailType = {
     ENTREPRISE: "entreprise",
     PARTICULIER: "particulier",
 };
 
+// On va chercher tous les emails existants dans la base de données
 export async function getMails(req, res) {
     try {
         const emails = await prisma.mail.findMany();
@@ -17,6 +19,7 @@ export async function getMails(req, res) {
     }
 }
 
+// On va chercher un email précis dans la base de donnée d'après l'ID
 export async function getMail(req, res) {
     try {
         const id = parseInt(req.params.id);
@@ -37,10 +40,12 @@ export async function getMail(req, res) {
     }
 }
 
+// Création de l'email dans la database
 export async function createMail(req, res) {
     try {
         const { email, type } = req.body;
 
+        //
         if (!Object.values(MailType).includes(type)) {
             return res
                 .status(400)
@@ -82,6 +87,7 @@ export async function createMail(req, res) {
     }
 }
 
+// Supprimer l'email
 export async function deleteMail(req, res) {
     try {
         const id = parseInt(req.params.id);

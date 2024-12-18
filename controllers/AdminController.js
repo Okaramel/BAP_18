@@ -23,12 +23,14 @@ export async function createAdmin(req, res) {
             },
         });
 
+        //erreurs
         return res.status(201).json(admin);
     } catch (error) {
         return res.status(500).json({ error: "Internal server error" });
     }
 }
 
+// Chercher un compte admin
 export async function getAdmin(req, res) {
     try {
         const admin = await prisma.admin.findMany();
@@ -39,6 +41,8 @@ export async function getAdmin(req, res) {
     }
 }
 
+
+// supprimer un comte admin
 export async function deleteAdmin(req, res) {
     try {
         const { id } = req.params;
@@ -55,6 +59,8 @@ export async function deleteAdmin(req, res) {
     }
 }
 
+
+// Update des informations (email / password) sur un admin
 export async function updateAdmin(req, res) {
     try {
         const { id } = req.params;

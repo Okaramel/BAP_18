@@ -1,12 +1,11 @@
-// Sélection des éléments HTML
 const form = document.getElementById("header_email");
 const responseMessage = document.getElementById("responseMessage");
 
-// Fonction pour envoyer une requête POST à l'API d'envoi d'email
+
 async function sendEmail(event) {
     event.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
 
-    // Récupération des données du formulaire
+    // Récupération des données (type et email) du formulaire
     const email = document.getElementById("email").value;
     const type = document.querySelector('input[name="type"]:checked').value;
 

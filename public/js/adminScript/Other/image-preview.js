@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // On va chercher les éléments dans le front avec l'ID pour tout ce qui est image
     const imageInputs = [
         {
             input: document.getElementById("logo"),
@@ -25,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
             preview: document.getElementById("bannerImage-preview"),
         },
     ];
-
     imageInputs.forEach(({ input, preview }) => {
         if (input && preview) {
             input.addEventListener("change", (event) => {

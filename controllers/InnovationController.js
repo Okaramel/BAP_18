@@ -11,6 +11,7 @@ export async function getInnovation(req, res) {
     }
 }
 
+// On récupère l'innovation grâce à l'ID
 export async function getInnovationById(req, res) {
     try {
         const id = parseInt(req.params.id);
@@ -31,6 +32,7 @@ export async function getInnovationById(req, res) {
     }
 }
 
+// Fonction qui permet de supprimer une innovation
 export async function deleteInnovation(req, res) {
     try {
         const id = parseInt(req.params.id);
