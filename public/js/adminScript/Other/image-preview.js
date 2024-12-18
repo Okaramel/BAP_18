@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             preview: document.getElementById("imageContainer2-preview"),
         },
         {
-            input: document.getElementById("imageContainer3"),
+            input: document.getElementById("imageContainer1"),
             preview: document.getElementById("imageContainer3-preview"),
         },
         {
