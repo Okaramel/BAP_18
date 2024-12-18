@@ -1,3 +1,19 @@
+let gallery = document.querySelector(".section_container");
+
+function addProject(project) {
+    // add a new project article in the gallery
+    let newProject = document.createElement("article"); // create new block
+    newProject.innerHTML = `
+                <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
+                        <div class="article_text">
+                            <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
+                            <p class="article_description">${project.descriptionProject}</p>
+                        </div>
+                `; // fill block
+    newProject.classList.add("section_article"); // add block class
+    gallery.appendChild(newProject); // add block to container
+}
+
 function fetchAll() {
     // get all projects from database
     return fetch(`http://localhost:3000/etiquette/`, {
@@ -19,7 +35,6 @@ function fetchAll() {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
             localStorage.setItem("projects", JSON.stringify(data));
             return data;
         })
@@ -33,66 +48,50 @@ function fetchAll() {
 
 // function fetchSearch() {}
 
+// show all projects function
 async function displayAll() {
     // const projects = localStorage.getItem("projects");
     const projects = await fetchAll();
-    console.log(projects);
 
     if (projects) {
-        console.log(projects);
-
-        let gallery = document.querySelector(".section_container");
         gallery.innerHTML = "";
 
         // create new article block for each project
         projects.forEach((project) => {
-            let newProject = document.createElement("article"); // create new block
-            newProject.innerHTML = `
-                <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
-                        <div class="article_text">
-                            <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
-                            <p class="article_description">${project.descriptionProject}</p>
-                        </div>
-                `; // fill block
-            newProject.classList.add("section_article"); // add block class
-            gallery.appendChild(newProject); // add block to container
+            addProject(project);
         });
     } else {
-        console.log("projects are not defined");
+        console.log("Projects are not defined");
     }
 }
 
 let searchForm = document.querySelector(".header_search");
 
+// quick search function
 searchForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     let search = document.querySelector("#search_value");
-    let gallery = document.querySelector(".section_container");
+    search = search.value.toLowerCase();
+
     gallery.innerHTML = "";
 
-    if (search.value != "") {
+    if (search != "") {
         let projects = JSON.parse(localStorage.getItem("projects"));
-        console.log(projects);
+        let foundProjects = 0;
 
         // search for project titles
         // create new article block for each project
         projects.forEach((project) => {
-            if (project.titleProject.includes(search.value)) {
-                let newProject = document.createElement("article"); // create new block
-                newProject.innerHTML = `
-                <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
-                        <div class="article_text">
-                            <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
-                            <p class="article_description">${project.descriptionProject}</p>
-                        </div>
-                `; // fill block
-                newProject.classList.add("section_article"); // add block class
-                gallery.appendChild(newProject); // add block to container
-            } else {
-                gallery.innerHTML = `<p>Couldn't find any project with this title</p>`;
+            if (project.titleProject.toLowerCase().includes(search)) {
+                foundProjects += 1;
+                addProject(project);
             }
         });
+
+        if (foundProjects == 0) {
+            gallery.innerHTML = `<p>Couldn't find any project</p>`;
+        }
     } else {
         displayAll();
     }
