@@ -14,7 +14,7 @@ const router = express.Router();
 ////////////////////
 // FRONT
 
-router.get("/", (req, res) => {
+router.get("/index", (req, res) => {
     res.render("index", { title: "Home" });
 });
 
@@ -26,7 +26,7 @@ router.get("/consoleLogin", (req, res) => {
     res.render("adminPage/loginAdmin", { title: "Admin Login" });
 });
 
-router.get("/email", (req, res) => {
+router.get("/", (req, res) => {
     res.render("email", { title: "Email" });
 });
 

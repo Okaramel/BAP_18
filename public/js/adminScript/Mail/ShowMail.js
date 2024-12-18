@@ -32,10 +32,7 @@ async function sendEmail(event) {
             const result = await response.json();
             responseMessage.textContent = result.message;
             responseMessage.style.color = "green";
-        } else {
-            const error = await response.json();
-            responseMessage.textContent = error.message || "Erreur lors de l'envoi de l'email.";
-            responseMessage.style.color = "red";
+            window.location.href =  "http://localhost:3000/index";
         }
     } catch (err) {
         // Gestion des erreurs réseau ou autres
