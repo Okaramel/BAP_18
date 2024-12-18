@@ -8,6 +8,10 @@
 Projet en équipe avec un client IFT (Institute for Future Technologies) qui a pour but de développer une galerie virtuel pour des innovations technologiques avec un système d'étiquette digitalisés.
 <br/>
 
+## Critères
+- Demander une adresse email pour accéder à un projet
+- Rechercher rapidement un projet (+ tag/personnes/année/thématique)
+
 ## Fonctionnalités
 
 <br />
