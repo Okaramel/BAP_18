@@ -1,19 +1,33 @@
-@use "variables";
+// Footer stylesheet
+
+@use "variables"; // use SASS variables (not CSS compatible)
 
 .footer {
-    padding: 4rem; 
+    padding: 4rem 3rem;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     align-items: start;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: variables.$lightgrey;
 
+    // display 1 item per row for mobile UI
     &_section {
-        width: 100%;
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+        padding: 0.5rem;
+    }
 
-        & img {
-            width: 50%;
-        }
+    // bring text sections down to same level with images or invisible spacers
+    &_image,
+    &_spacer {
+        width: 50%;
+        aspect-ratio: 1/1;
+    }
+
+    // deactivate spacers for mobile UI
+    &_spacer {
+        display: none;
     }
 
     & ul {
@@ -22,24 +36,42 @@
         list-style: none;
     }
 
-    & i {
-        font-size: 1.5rem;
-    }
-
-    & .socials {
+    &_socials {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
+        justify-content: start;
         gap: 1rem;
-        justify-content: space-between;
+
+        & i {
+            font-size: 1.5rem;
+        }
     }
 }
 
-// Adapter les éléments selon la taille de l'écran
-@media (max-width: 1000px) {
+// adapt footer flexbox items to screen width
+@media screen and (min-width: 480px) {
     .footer {
-        flex-flow: column nowrap; /* Passer en colonne */
-        align-items: center; /* Centrer les éléments dans la colonne */
-        text-align: center; /* Centrer le texte si nécessaire */
-        gap: 2rem;
+        // display 2 items per row
+        &_section {
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
+        }
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .footer {
+        // display 4 items per row
+        &_section {
+            -ms-flex: 25%;
+            flex: 25%;
+            max-width: 25%;
+        }
+
+        // activate spacers
+        &_spacer {
+            display: block;
+        }
     }
 }
