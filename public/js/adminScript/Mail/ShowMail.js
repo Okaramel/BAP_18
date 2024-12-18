@@ -34,6 +34,10 @@ async function sendEmail(event) {
             responseMessage.style.color = "green";
             window.location.href =  "http://localhost:3000/index";
         }
+
+        if (response.status === 200){
+            window.location.href =  "http://localhost:3000/index";
+        }
     } catch (err) {
         // Gestion des erreurs réseau ou autres
         console.error("Erreur lors de la requête : ", err);
