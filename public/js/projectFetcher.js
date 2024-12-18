@@ -26,16 +26,16 @@ function fetchAll() {
 
             // create new article block for each project
             data.forEach((project) => {
-                let newProject = document.createElement("article");                                 // create new block
+                let newProject = document.createElement("article"); // create new block
                 newProject.innerHTML = `
                 <a href="etiquette/page/${project.id}" class="article_img"><img src="${project.background}" alt="" /></a>
                         <div class="article_text">
                             <a href="etiquette/page/${project.id}" class="article_title"><h4>${project.titleProject}</h4></a>
                             <p class="article_description">${project.descriptionProject}</p>
                         </div>
-                `;                                                                                  // fill block
-                newProject.classList.add("section_article");                                        // add block class
-                gallery.appendChild(newProject);                                                    // add block to container
+                `; // fill block
+                newProject.classList.add("section_article"); // add block class
+                gallery.appendChild(newProject); // add block to container
             });
         })
         .catch((error) => {
