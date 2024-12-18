@@ -55,12 +55,23 @@ export async function createMail(req, res) {
             return res.status(400).json({ error: "L'email est requis." });
         }
 
+        const existingEmail = await prisma.mail.findUnique({
+            where: { email },
+        });
+
+        if (existingEmail) {
+            return res.status(200).json({
+                message: "Cet email existe déjà dans la base de données.",
+            });
+        }
+
         const newEmail = await prisma.mail.create({
             data: {
                 email,
                 type,
             },
         });
+        
 
         return res.status(201).json(newEmail);
     } catch (error) {
