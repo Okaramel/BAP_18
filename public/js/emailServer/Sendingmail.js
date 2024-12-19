@@ -32,6 +32,5 @@ document.getElementById('header_email').addEventListener('submit', function (eve
 
     const email = document.getElementById('email').value;
     const type = document.querySelector('input[name="type"]:checked').value;
-
     sendEmail(email, type); // Appelle la fonction d'envoi d'email
 });

@@ -111,6 +111,11 @@
     }
 }
 
+.form_emailing {
+    display: flex;
+    gap: 5px;
+}
+
 input[type="number"]::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
