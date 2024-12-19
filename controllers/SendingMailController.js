@@ -27,7 +27,7 @@ export const SendingMailController = async (req, res) => {
     try {
         await sendMail(
             email,
-            "Avez-vous aimer la visite ?",
+            "Avez-vous aimé la visite ?",
             `
             <h1>Merci de votre visite !</h1>
             <br>
