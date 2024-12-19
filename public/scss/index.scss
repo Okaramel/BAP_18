@@ -8,6 +8,7 @@
     height: 100dvh;
     min-height: 100vh;
     padding: 8rem 8rem 6rem 8rem;
+    padding-top: calc(variables.$nav-height + 8rem);
     display: flex;
     flex-flow: column nowrap;
     gap: 1.5rem;
@@ -71,8 +72,8 @@
 @media (max-width: 768px) {
     .header {
         gap: 20px;
-        padding: 10px;
         padding: 30px;
+        padding-top: calc(variables.$nav-height + 30px);
         width: 100%;
         display: flex;
         flex-flow: column nowrap;

@@ -1,107 +1,165 @@
-@use "variables";
+// Navbar stylesheet
+
+@use "variables"; // use SASS variables (not CSS compatible)
 
 .navbar {
     position: fixed;
-    z-index: 99;
-    inset: 0 0 auto 0;
-    height: 64px;
-    padding: 0 30% 0 8rem;
+    top: 0;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-flow: column nowrap;
+    align-items: flex-start;
     justify-content: space-between;
     background-color: variables.$white;
-    box-shadow: 0 -5px 20px 0px variables.$black;
+    z-index: 99;
 
-    &_logo {
-        height: 80%;
+    & #navbar_show {
+        display: none;
 
-        &-img {
-            height: 100%;
+        &:checked {
+            ~ .navbar_links {
+                visibility: visible;
+                height: calc(100dvh - variables.$nav-height);
+            }
+
+            ~ .navbar_header .navbar_button span {
+                &:nth-child(1) {
+                    transform: translateY(13px) rotate(45deg);
+                }
+
+                &:nth-child(2) {
+                    opacity: 0;
+                }
+
+                &:nth-child(3) {
+                    transform: translateY(-12.5px) rotate(-45deg);
+                }
+            }
         }
     }
 
-    & ul {
+    &_header {
+        width: 100%;
+        height: variables.$nav-height;
+        padding: 0 1rem;
+
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+
+        & img {
+            height: 50px;
+            aspect-ratio: 1/1;
+        }
+
+        & div {
+            height: 50px;
+            aspect-ratio: 1/1;
+            padding: 0.5rem;
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 0.5rem;
+
+            & span {
+                display: block;
+                width: 100%;
+                height: 33%;
+                background-color: black;
+                border-radius: 1rem;
+                transition: all 0.25s ease-in-out;
+
+                transform-origin: center center;
+            }
+        }
+    }
+
+    &_links {
+        width: 100%;
+        height: 0;
         margin: 0;
         padding: 0;
+        visibility: hidden;
+
         display: flex;
-        flex-direction: row;
-        gap: 1.5rem;
-        list-style: none;
-    }
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
 
-    & a {
-        font-size: 0.7rem;
-        color: variables.$black;
-    }
-}
-//Sidenav
-
-.menu_bars {
-    width: 30px;
-    margin: 5px 5px 5px 20px;
-    cursor: pointer;
-}
-
-.menu_logo {
-    width: 50px;
-    margin: 5px 20px 5px 5px;
-}
-
-.menu_bouton {
-    display: flex;
-    justify-content: space-between;
-}
-
-.menu_burger {
-    display: none;
-    height: 0;
-    background-color: variables.$white;
-    position: absolute;
-    top: -2px;
-    min-width: 330px;
-    max-width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1000;
-
-    ul {
         list-style-type: none;
-    }
 
-    li {
-        text-decoration: none;
-        padding-bottom: 2rem;
-        padding-top: 2rem;
+        overflow: hidden;
+        transition: all 0.25s ease-in-out;
+
+        & li {
+            width: 100%;
+            height: 100%;
+
+            & a {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.5rem 1rem;
+                font-size: 0.7rem;
+                white-space: nowrap;
+
+                &:hover,
+                &:active {
+                    color: white;
+                    background-color: black;
+                }
+            }
+        }
     }
 }
 
-.menu_burger.openNav {
-    height: 100%;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Fond semi-transparent */
-    backdrop-filter: blur(8px); /* Effet de flou */
-    z-index: 999;
-}
-
-@media (max-width: 1180px) {
-    .header {
-        background: none;
-    }
+@media screen and (min-width: 960px) {
     .navbar {
-        display: none;
-    }
+        // position: relative;
+        height: variables.$nav-height;
+        padding: 0 4rem;
+        flex-flow: row nowrap;
 
-    .menu_burger {
-        display: block;
+        & #navbar_show {
+            display: none;
+
+            &,
+            &:checked {
+                ~ .navbar_links {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    visibility: visible;
+
+                    li {
+                        height: 100%;
+                        width: auto;
+                    }
+
+                    a {
+                        &:hover,
+                        &:active {
+                            color: variables.$black;
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        &_header {
+            position: absolute;
+            top: 0;
+            left: 4rem;
+            width: fit-content;
+        }
+
+        &_header &_button {
+            display: none;
+        }
     }
 }
