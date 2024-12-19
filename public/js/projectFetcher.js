@@ -61,7 +61,6 @@ async function displayAll() {
             addProject(project);
         });
     } else {
-        console.log("Projects are not defined");
     }
 }
 

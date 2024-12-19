@@ -12,7 +12,8 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 1.5rem;
-    background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%), url("/img/index_header.webp") no-repeat center center / cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%),
+        url("/img/index_header.webp") no-repeat center center / cover;
 
     & * {
         margin: 0;
@@ -37,8 +38,7 @@
 
         & input {
             width: 20rem;
-            padding: 0.5rem 0;
-
+            padding: 0.5rem 0.3rem;
             font-size: 1rem;
             color: variables.$white;
             background-color: transparent;

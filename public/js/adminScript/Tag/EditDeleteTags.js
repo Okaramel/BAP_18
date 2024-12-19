@@ -182,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const deletedTag = await response.json();
-            console.log("Tag supprimé:", deletedTag);
             getTags(); // rafraîchir la liste des tags
             overlayDelete.style.display = "none";
         } catch (error) {

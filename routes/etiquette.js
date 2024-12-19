@@ -3,7 +3,6 @@ import {
     getEtiquettes,
     createEtiquette,
     deleteEtiquette,
-    updateEtiquette,
     getEtiquetteById,
 } from "../controllers/EtiquetteController.js";
 import { verifyToken } from "../middleware/TokenMiddleware.js";
@@ -64,19 +63,6 @@ router.post(
 );
 
 router.delete("/:id", verifyToken, deleteEtiquette);
-router.put(
-    "/:id",
-    verifyToken,
-    upload.fields([
-        { name: "logo", maxCount: 1 },
-        { name: "background", maxCount: 1 },
-        { name: "imageContainer2", maxCount: 1 },
-        { name: "imageContainer3", maxCount: 1 },
-        { name: "bannerImage", maxCount: 1 },
-        { name: "imageContainer4", maxCount: 1 },
-    ]),
-    updateEtiquette
-);
 
 router.get("/:id", verifyToken, getEtiquetteById);
 
