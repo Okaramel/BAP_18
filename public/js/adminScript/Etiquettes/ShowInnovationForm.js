@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = "http://localhost:3000/innovation"; // Remplacez par l'URL de votre API pour récupérer les innovations
+    const apiUrl = "http://localhost:3000/innovation";
     const formInnovationSelect = document.getElementById("innovation");
 
     // Fonction pour récupérer les inovations depuis l'API

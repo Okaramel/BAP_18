@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Gestion des événements de suppression
+    // Gestion de la  suppression
     confirmDeleteBtn.addEventListener("click", () => {
         if (etiquetteIdToDelete) {
             deleteEtiquette(etiquetteIdToDelete);

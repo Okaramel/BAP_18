@@ -1,34 +1,30 @@
-@use "variables";
-// sass public/scss/index.scss:public/css/index.css --watch --style=compressed
+// Index/Homepage stylesheet
+
+// compile command: sass public/scss/index.scss:public/css/index.css --watch --style=compressed
+
+@use "variables"; // use SASS variables (not CSS compatible)
 
 .header {
     height: 100dvh;
     min-height: 100vh;
-    padding: 13.5rem 8rem 6rem 8rem;
+    padding: 8rem 8rem 6rem 8rem;
     display: flex;
     flex-flow: column nowrap;
     gap: 1.5rem;
     background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%),
-        url("/img/index_header.webp") no-repeat center center/cover;
+        url("/img/index_header.webp") no-repeat center center / cover;
 
     & * {
         margin: 0;
         color: variables.$white;
     }
 
-    &_text {
-        color: variables.$grey;
-        @media (max-width: 768px) {
-            p {
-                font-size: 16px;
-            }
-        }
+    &_title {
+        font-size: 3.5rem;
+    }
 
-        @media (max-width: 480px) {
-            p {
-                font-size: 14px;
-            }
-        }
+    &_subtitle {
+        font-size: 1.5rem;
     }
 
     &_search {
@@ -40,12 +36,17 @@
         gap: 0.5rem;
 
         & input {
-            width: 15rem;
-            padding: 0.5rem 1rem;
-            color: variables.$black;
+            width: 20rem;
+            padding: 0.5rem 0.3rem;
             font-size: 1rem;
+            color: variables.$white;
+            background-color: transparent;
             border: none;
-            border-radius: 0.5rem;
+            border-bottom: 2px solid variables.$white;
+
+            &::placeholder {
+                color: variables.$grey;
+            }
         }
 
         & button {
@@ -75,17 +76,9 @@
         width: 100%;
         display: flex;
         flex-flow: column nowrap;
-        background: variables.$black;
-        background: linear-gradient(
-                rgba(0, 0, 0, 0.6) 0%,
-                rgba(0, 0, 0, 0.9) 100%
-            ),
-            url(/img/index_header.webp) no-repeat center center / cover;
 
-        &_text {
-            word-break: break-word;
-            overflow-wrap: break-word;
-            white-space: normal;
+        &_title {
+            font-size: 2rem;
         }
     }
 }
@@ -97,9 +90,6 @@
 
     &_container {
         width: 100%;
-        display: grid;
-        // grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-        // grid-template-columns: repeat(4, 1fr);
         display: flex;
         flex-flow: row wrap;
     }

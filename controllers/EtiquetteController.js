@@ -60,14 +60,6 @@ export async function getEtiquetteById(req, res) {
             return res.status(404).json({ error: "Étiquette non trouvée" });
         }
 
-        // Nettoyer les chemins d'images
-        // if (etiquette.logo) etiquette.logo = etiquette.logo.replace("public/", "");
-        // if (etiquette.background) etiquette.background = etiquette.background.replace("public/", "");
-        // if (etiquette.imageContainer2) etiquette.imageContainer2 = etiquette.imageContainer2.replace("public/", "");
-        // if (etiquette.imageContainer3) etiquette.imageContainer3 = etiquette.imageContainer3.replace("public/", "");
-        // if (etiquette.bannerImage) etiquette.bannerImage = etiquette.bannerImage.replace("public/", "");
-        // if (etiquette.imageContainer4) etiquette.imageContainer4 = etiquette.imageContainer4.replace("public/", "");
-
         return res.status(200).json(etiquette);
     } catch (error) {
         console.error("Erreur lors de la récupération de l'étiquette:", error);

@@ -15,8 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (response.ok) {
                 const creators = await response.json();
-                populateCreatorSelect(creators); // remplie le select avec les créateurs
-                console.log(creators);
+                populateCreatorSelect(creators); // on appelle la fonction pour remplir le select avec les créateurs
             } else {
                 console.error("Erreur lors de la récupération des créateurs");
             }
