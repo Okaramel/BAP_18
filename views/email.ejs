@@ -2,24 +2,33 @@
 <html lang="en">
     <head>
         <%- include('./partials/head.ejs') %>
-        <link rel="stylesheet" href="/css/email.css">
+        <link rel="stylesheet" href="/css/email.css" />
     </head>
     <body>
         <%- include('./partials/navbar.ejs') %>
 
         <header class="header">
-            <h1>Welcome</h1>
-            <p>Please enter your email to access this exposition</p>
             <form action="/send_mail" id="header_email">
-                <input type="email" inputmode="email" name="email" id="email" placeholder="Email" />
-                <label>
-                    <input type="radio" name="type" id="type_entreprise" class="type" value="entreprise"> Entreprise
-                </label>
-                <label>
-                    <input type="radio" name="type" id="type_particulier" class="type" value="particulier" checked> Particulier
-                </label>
+                <h1>Welcome</h1>
+
+                <div class="form_component">
+                    <p>Please enter your email to access this exposition</p>
+                    <input type="email" inputmode="email" name="email" id="email" placeholder="john.doe@gmail.com" />
+                </div>
+
+                <div class="form_component">
+                    <p>Please specify the type of email</p>
+                    
+                    <div class="form_type">
+                        <input type="radio" name="type" id="type_entreprise" class="type" value="entreprise" />
+                        <label for="type_entreprise">Company</label>
+                        <input type="radio" name="type" id="type_particulier" class="type" value="particulier" checked />
+                        <label for="type_particulier">Private</label>
+                    </div>
+                </div>
+
                 <!-- <button type="submit">Send <i class="fa-solid fa-paper-plane"></i></button> -->
-                <button type="submit">Send</i></button>
+                <button type="submit">Send</button>
             </form>
             <div id="responseMessage"></div>
         </header>
