@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const newEtiquette = await response.json();
-            console.log("Étiquette ajoutée avec succès:", newEtiquette);
 
             // ferme le popup et rafraîchir la page
             overlay.style.display = "none";

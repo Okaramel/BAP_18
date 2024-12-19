@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const newCreator = await response.json();
-            console.log("Créateur ajouté avec succès:", newCreator);
 
             // ferme le popup et rafraîchir la page
             overlay.style.display = "none";

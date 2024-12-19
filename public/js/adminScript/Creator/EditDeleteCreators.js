@@ -182,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const deletedCreator = await response.json();
-            console.log("Créateur supprimé:", deletedCreator);
             getCreators(); // rafraîchie la liste des créateurs
             location.reload();
         } catch (error) {
