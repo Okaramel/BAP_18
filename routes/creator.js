@@ -11,7 +11,7 @@ import { verifyToken } from "../middleware/TokenMiddleware.js";
 
 const router = express.Router();
 
-// Route pour créer un créateur avec téléchargement de fichier
+// route pour créer un créateur avec téléchargement de fichier
 router.post("/", verifyToken, upload.single("profile_picture"), createCreator);
 
 router.get("/", verifyToken, getCreators);

@@ -3,7 +3,7 @@ const cancelDeleteBtn = document.querySelector(".overlay-delete .no");
 const overlayDelete = document.querySelector(".overlay-delete");
 let emailIdToDelete = null;
 
-//On va chercher depuis MailController tous les emails
+//on va chercher depuis MailController tous les emails
 async function getMails() {
     try {
         const response = await fetch("http://localhost:3000/mail", {
@@ -74,7 +74,7 @@ function displayEmails(emails) {
             overlayDelete.style.display = "flex";
         });
     });
-    // Gestion des événements de suppression
+    // gestion des événements de suppression
     confirmDeleteBtn.addEventListener("click", () => {
         if (emailIdToDelete) {
             deleteMail(emailIdToDelete);

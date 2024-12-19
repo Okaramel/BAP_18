@@ -12,7 +12,7 @@ import prisma from "../config/prisma.js";
 
 const router = express.Router();
 
-// Route pour rendre la page HTML de l'étiquette
+// route pour rendre la page HTML de l'étiquette
 router.get("/page/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
@@ -36,14 +36,6 @@ router.get("/page/:id", async (req, res) => {
         if (!etiquette) {
             return res.status(404).send("Étiquette non trouvée");
         }
-
-        // Nettoyer les chemins d'images
-        // if (etiquette.logo) etiquette.logo = etiquette.logo.replaceAll("\\", "/");
-        // if (etiquette.background) etiquette.background = etiquette.background.replaceAll("\\", "/");
-        // if (etiquette.imageContainer2) etiquette.imageContainer2 = etiquette.imageContainer2.replaceAll("\\", "/");
-        // if (etiquette.imageContainer3) etiquette.imageContainer3 = etiquette.imageContainer3.replaceAll("\\", "/");
-        // if (etiquette.bannerImage) etiquette.bannerImage = etiquette.bannerImage.replaceAll("\\", "/");
-        // if (etiquette.imageContainer4) etiquette.imageContainer4 = etiquette.imageContainer4.replaceAll("\\", "/");
 
         res.render("etiquettePage", {
             etiquette,
