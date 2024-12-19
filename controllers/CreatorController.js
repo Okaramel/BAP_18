@@ -60,7 +60,7 @@ export async function createCreator(req, res) {
     try {
         const { name, email, linkedin } = req.body;
         const profilePicture = req.file
-            ? req.file.path.replace("public/", "")
+            ? req.file.path.replace(/public[\\/]/, "").replaceAll("\\", "/")
             : null;
 
         const newCreator = await prisma.creator.create({
