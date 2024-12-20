@@ -108,7 +108,6 @@ export async function createEtiquette(req, res) {
         }
 
         // récupére les chemins des fichiers téléchargés avec vérification
-        // clean up paths and replace all anti slash with slash
         const logo = req.files?.logo
             ? req.files.logo[0].path
                   .replace(/public[\\/]/, "")
@@ -215,14 +214,14 @@ export async function deleteEtiquette(req, res) {
     try {
         const id = parseInt(req.params.id);
 
-        // supprimer les relations dans EtiquetteTag
+        // supprime les relations dans EtiquetteTag
         await prisma.etiquetteTag.deleteMany({
             where: {
                 etiquetteId: id,
             },
         });
 
-        // supprimer les relations dans EtiquetteInnovation
+        // supprime les relations dans EtiquetteInnovation
         await prisma.etiquetteInnovation.deleteMany({
             where: {
                 etiquetteId: id,
@@ -244,4 +243,3 @@ export async function deleteEtiquette(req, res) {
             .send("Erreur lors de la suppression de l'étiquette");
     }
 }
-// fonction pour mettre à jour une étiquette

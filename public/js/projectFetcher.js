@@ -90,6 +90,7 @@ searchForm.addEventListener("submit", (event) => {
 
         if (foundProjects == 0) {
             gallery.innerHTML = `<p>Couldn't find any project</p>`;
+            gallery.style.justifyContent = "center";
         }
     } else {
         displayAll();
