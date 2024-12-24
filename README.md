@@ -20,13 +20,35 @@ Projet en équipe avec un client IFT (Institute for Future Technologies) qui a p
 - SASS
 
 ## Ouvrir le site
-- Ecrire npm i pour installer les modules
-- Modifier le DATABASE_URL dans le .env
-- Ouvrir MAMP/Laragon
-- Créer une base de données 'ift'
-- Créer une nouvelle migration npx prisma migrate dev
-- Faire npx prisma generate
-- Ecrire dans la console VS CODE "npm run create-innovations" pour créer les innovations
+Il faut suivre ce guide pour préparer et voir le site sur une nouvelle machine.
+
+### Prérequis
+[Node.js](https://nodejs.org/) et [Laragon](https://laragon.org/) doivent être installés et prêts à l'usage sur un ordinateur Windows.
+
+### Installation
+- Télécharger le code du projet depuis la page d'accueil
+- Extraire le projet à un endroit accessible de l'ordinateur
+- Ouvrir un terminal à la racine du projet et lancer la commande ```npm i``` (installation des paquets)
+
+### Base de Données
+- Créer un fichier nommé ```.env``` à la racine du projet et y écrire les lignes suivantes:
+  ```
+  DATABASE_URL="mysql://*nom d'utilisateur*:*mot de passe*@localhost:3306/ift"
+  JWT_SECRET = "*générer une séquence de charactères au hasard"
+  ```
+  Remplacer les zones entourées par des ```*``` avec les identifiants PHPMyAdmin (accès à la BDD) et une clé de sécurité
+- Se connecter à PHPMyAdmin (via Laragon) et créer une nouvelle base de données nommée ```ift``` (sauvegarder et supprimer les BDD avec ce nom déjà existantes)
+- Importer le fichier ```ift.sql``` (dans le dossier ```setup```) dans la base de données ```ift```
+- Dans le terminal du projet, exécuter les commandes suivantes:
+  ```
+  npx prisma migrate dev
+  npx prisma generate
+  npm run create-innovations
+  ```
+
+### Images
+- Extraire le fichier ```uploads_source.zip``` dans le dossier ```setup```
+- Déplacer le contenu du dossier ```uploads_source``` (sous-dossier ```uploads```) dans le dossier ```public``` du projet
 
 ## Créer Etiquettes/Créateurs/Tags
 - Dans le terminal écrire npm run dev pour lancer le serveur
