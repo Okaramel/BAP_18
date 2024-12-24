@@ -1,7 +1,7 @@
 # Bourse au Projet
 
 ## Description
-Projet en équipe avec un client IFT (Institute for Future Technologies) qui a pour but de développer une galerie virtuel pour des innovations technologiques avec un système d'étiquette digitalisés.
+Projet en équipe avec pour l'IFT (Institute for Future Technologies) qui a pour but de développer une galerie virtuelle présentant des innovations technologiques avec un système d'étiquette digitalisés.
 <br/>
 
 ## Critères
